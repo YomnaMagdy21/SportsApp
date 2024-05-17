@@ -1,18 +1,15 @@
 //
-//  FavTableViewController.swift
+//  LeaguesTableViewController.swift
 //  SportsApp
 //
 //  Created by Yomna Magdy  on 5/17/24.
 //
 
 import UIKit
-import Kingfisher
 import SafariServices
 
+class LeaguesTableViewController: UITableViewController ,SFSafariViewControllerDelegate{
 
-class FavTableViewController: UITableViewController ,SFSafariViewControllerDelegate{
-
- 
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,12 +18,21 @@ class FavTableViewController: UITableViewController ,SFSafariViewControllerDeleg
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-     
-        
     }
 
     // MARK: - Table view data source
 
+    @IBAction func showVideo(_ sender: Any) {
+        guard let url = URL(string: "https://www.youtube.com/watch?v=Jlj0wc3USrU") else { return  }
+        
+        let videoVC = SFSafariViewController(url: url)
+        videoVC.delegate = self
+        present(videoVC, animated: true, completion: nil)
+    }
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        print("finish")
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -34,33 +40,21 @@ class FavTableViewController: UITableViewController ,SFSafariViewControllerDeleg
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 7
+        return 10
     }
 
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "fav", for: indexPath) as! FavTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "league", for: indexPath) as! TableViewCell
         
         let imageUrl = URL(string: "https://i.ebayimg.com/images/g/nMIAAOSwi15kY5HN/s-l1600.jpg")
-//             
-        cell.badge.kf.setImage(with: imageUrl)
-        cell.name.text = "title"
-//
-//       
+        cell.imgLeague.kf.setImage(with: imageUrl)
+        cell.TitleLeague.text = "title"
 
         return cell
     }
     
-  
-    @IBAction func showVideo(_ sender: Any) {
-        guard let url = URL(string: "https://www.youtube.com/watch?v=Jlj0wc3USrU") else { return  }
-        
-        let videoVC = SFSafariViewController(url: url)
-        videoVC.delegate = self
-        present(videoVC, animated: true, completion: nil)
-  
-    }
-    
+
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

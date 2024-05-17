@@ -20,6 +20,7 @@ class ViewController: UIViewController , UICollectionViewDelegate, UICollectionV
             layout.minimumLineSpacing = 0
             layout.minimumInteritemSpacing = 0
                }
+        
       
     }
     
@@ -41,10 +42,13 @@ class ViewController: UIViewController , UICollectionViewDelegate, UICollectionV
 
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width/2.4, height: 200)
+        return CGSize(width: view.frame.width/2.4, height: view.frame.width/2)
     }
     
-
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        // Get the new view controller using segue.destination.
+//        // Pass the selected object to the new view controller.
+//    }
 
 }
 
