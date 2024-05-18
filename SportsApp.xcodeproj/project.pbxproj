@@ -181,7 +181,6 @@
 				472AE0122BF537B4000C97FF /* LaunchScreen.storyboard */,
 				472AE0152BF537B4000C97FF /* Info.plist */,
 				472AE00D2BF537B0000C97FF /* SportsApp.xcdatamodeld */,
-        Sec-Storyboard-Views
 				07CF75A52BF7C19800731DC3 /* LeaguesDetailsCollectionViewController.swift */,
 				07CF75A72BF7C26900731DC3 /* LeaguesUpCommingEventsCollectionViewCell.swift */,
 				07CF75A82BF7C26900731DC3 /* LeaguesUpCommingEventsCollectionViewCell.xib */,
@@ -199,7 +198,6 @@
 				4786CD362BF77D65009D4BD8 /* LeaguesTableViewController.swift */,
 				4793D77A2BF7DE03007A84A8 /* TableViewCell.swift */,
 				47C67DAC2BF80BE300046002 /* FavTableViewCell.swift */,
-        development
 			);
 			path = SportsApp;
 			sourceTree = "<group>";
@@ -488,13 +486,11 @@
 				07CF75B02BF7FFD100731DC3 /* SectionHeaderView.swift in Sources */,
 				07CF75BA2BF8A71200731DC3 /* TeamDetailCollectionViewController.swift in Sources */,
 				472AE00F2BF537B0000C97FF /* SportsApp.xcdatamodeld in Sources */,
-      Sec-Storyboard-Views
 				07CF75AE2BF7E8AA00731DC3 /* LeaguesTeamsCellCollectionViewCell.swift in Sources */,
 				07CF75AA2BF7C26900731DC3 /* LeaguesUpCommingEventsCollectionViewCell.swift in Sources */,
 				07CF75B82BF8A37000731DC3 /* TeamDetailsBottomSectionCollectionViewCell.swift in Sources */,
 				07CF75B42BF8A1C200731DC3 /* TeamDetailsTopSectionCollectionViewCell.swift in Sources */,
 				47C67DAD2BF80BE300046002 /* FavTableViewCell.swift in Sources */,
-        development
 				472AE0072BF537B0000C97FF /* SceneDelegate.swift in Sources */,
 				47A0EA2C2BF6D74000158DD0 /* FavTableViewController.swift in Sources */,
 				4786CD372BF77D65009D4BD8 /* LeaguesTableViewController.swift in Sources */,
