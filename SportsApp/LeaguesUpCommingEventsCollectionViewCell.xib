@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="LeaguesUpCommingEventsCollectionViewCell" customModule="SportsApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="326" height="156"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="326" height="156"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="barcelona" translatesAutoresizingMaskIntoConstraints="NO" id="gNv-8F-ktO" userLabel="FirstTeamImage">
+                        <rect key="frame" x="10" y="56.666666666666664" width="91.333333333333329" height="67.666666666666686"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fcbarchelona" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jzi-01-3Du">
+                        <rect key="frame" x="6" y="129" width="99.333333333333329" height="20.333333333333343"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dxg-DC-hpS">
+                        <rect key="frame" x="141.33333333333334" y="44.666666666666664" width="36.666666666666657" height="20.999999999999993"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2023-05-24" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mqn-Db-Rdn">
+                        <rect key="frame" x="114" y="76.333333333333329" width="91.333333333333314" height="19.333333333333329"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22:00" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GOA-c3-EWB">
+                        <rect key="frame" x="137" y="110.66666666666667" width="45" height="21.000000000000014"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="barcelona" translatesAutoresizingMaskIntoConstraints="NO" id="9aW-ZI-xcD" userLabel="SecTeamImage">
+                        <rect key="frame" x="218" y="56.666666666666664" width="98" height="67.666666666666686"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="liverpool" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMQ-n5-eLx">
+                        <rect key="frame" x="234.66666666666666" y="129" width="64.666666666666657" height="20.333333333333343"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="gNv-8F-ktO" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" id="17L-A2-BWX"/>
+                <constraint firstItem="9aW-ZI-xcD" firstAttribute="leading" secondItem="Mqn-Db-Rdn" secondAttribute="trailing" constant="12.666666666666686" id="1J6-Wt-8Di"/>
+                <constraint firstItem="gNv-8F-ktO" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.4" constant="5" id="7TB-Rv-gG8"/>
+                <constraint firstItem="EMQ-n5-eLx" firstAttribute="bottom" secondItem="Jzi-01-3Du" secondAttribute="bottom" id="CNX-Fp-AM7"/>
+                <constraint firstItem="Jzi-01-3Du" firstAttribute="centerX" secondItem="gNv-8F-ktO" secondAttribute="centerX" id="Gwt-Q8-HgV"/>
+                <constraint firstItem="gNv-8F-ktO" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.28" id="Ihq-l8-Rg0"/>
+                <constraint firstItem="gNv-8F-ktO" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="LTz-u9-Gaa"/>
+                <constraint firstItem="EMQ-n5-eLx" firstAttribute="top" secondItem="Jzi-01-3Du" secondAttribute="top" id="MSe-Ff-3vI"/>
+                <constraint firstItem="GOA-c3-EWB" firstAttribute="centerX" secondItem="Mqn-Db-Rdn" secondAttribute="centerX" id="McY-0g-6ZE"/>
+                <constraint firstItem="9aW-ZI-xcD" firstAttribute="leading" secondItem="Dxg-DC-hpS" secondAttribute="trailing" constant="40" id="Nhl-7V-kbE"/>
+                <constraint firstItem="Jzi-01-3Du" firstAttribute="top" secondItem="gNv-8F-ktO" secondAttribute="bottom" constant="4.6666666666666572" id="NwE-08-Okg"/>
+                <constraint firstItem="EMQ-n5-eLx" firstAttribute="centerX" secondItem="9aW-ZI-xcD" secondAttribute="centerX" id="P3W-2P-YkC"/>
+                <constraint firstItem="9aW-ZI-xcD" firstAttribute="leading" secondItem="gNv-8F-ktO" secondAttribute="trailing" constant="116.66666666666667" id="SsT-bY-kld"/>
+                <constraint firstItem="9aW-ZI-xcD" firstAttribute="bottom" secondItem="gNv-8F-ktO" secondAttribute="bottom" id="W0L-iL-dSf"/>
+                <constraint firstItem="Mqn-Db-Rdn" firstAttribute="firstBaseline" secondItem="Dxg-DC-hpS" secondAttribute="baseline" constant="30" id="cEg-b6-3BG"/>
+                <constraint firstAttribute="trailing" secondItem="9aW-ZI-xcD" secondAttribute="trailing" constant="10" id="cve-ac-J0V"/>
+                <constraint firstItem="Dxg-DC-hpS" firstAttribute="leading" secondItem="gNv-8F-ktO" secondAttribute="trailing" constant="40" id="edI-5T-eLr"/>
+                <constraint firstItem="Mqn-Db-Rdn" firstAttribute="centerX" secondItem="Dxg-DC-hpS" secondAttribute="centerX" id="nRW-NX-6AL"/>
+                <constraint firstItem="GOA-c3-EWB" firstAttribute="top" secondItem="Mqn-Db-Rdn" secondAttribute="bottom" constant="15" id="vKS-oK-ZXg"/>
+                <constraint firstItem="Dxg-DC-hpS" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" multiplier="0.6" constant="1" id="w78-ZS-xg2"/>
+                <constraint firstItem="9aW-ZI-xcD" firstAttribute="top" secondItem="gNv-8F-ktO" secondAttribute="top" id="x6k-LV-ewa"/>
+            </constraints>
+            <size key="customSize" width="326" height="156"/>
+            <connections>
+                <outlet property="firstTeamImage" destination="gNv-8F-ktO" id="HPT-gK-xZR"/>
+                <outlet property="firstTeamName" destination="Jzi-01-3Du" id="ZEp-2i-fpz"/>
+                <outlet property="matchDate" destination="Mqn-Db-Rdn" id="zXx-Mq-I7M"/>
+                <outlet property="matchTime" destination="GOA-c3-EWB" id="3l7-nc-JAg"/>
+                <outlet property="secTeamImage" destination="9aW-ZI-xcD" id="mE2-fp-YFr"/>
+                <outlet property="secTeamName" destination="EMQ-n5-eLx" id="PI2-Er-M1u"/>
+            </connections>
+            <point key="canvasLocation" x="227.48091603053433" y="26.056338028169016"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="barcelona" width="1024" height="724"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
