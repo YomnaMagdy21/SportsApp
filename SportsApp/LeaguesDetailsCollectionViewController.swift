@@ -15,19 +15,16 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Register custom cells
         let upcomingEventsNib = UINib(nibName: "LeaguesUpCommingEventsCollectionViewCell", bundle: nil)
         self.collectionView!.register(upcomingEventsNib, forCellWithReuseIdentifier: reuseIdentifier)
         
         let teamsCellNib = UINib(nibName: "LeaguesTeamsCellCollectionViewCell", bundle: nil)
         self.collectionView!.register(teamsCellNib, forCellWithReuseIdentifier: teamsCellReuseIdentifier)
         
-        // Register custom header view
         collectionView.register(SectionHeaderView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: SectionHeaderView.reuseIdentifier)
         
-        // Set up the collection view layout
         collectionView.setCollectionViewLayout(createLayout(), animated: false)
     }
     
@@ -56,7 +53,6 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
         section.orthogonalScrollingBehavior = .continuous
         section.contentInsets = NSDirectionalEdgeInsets(top: 32, leading: 0, bottom: 0, trailing: 0)
         
-        // Add header
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(44))
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
         section.boundarySupplementaryItems = [header]
@@ -104,7 +100,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10 // Change this to the number of items you want for each section
+        return 10 
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
