@@ -182,7 +182,7 @@
 		43D6DC9A997D0CDD8E1B3B01C8D5E1D7 /* Alamofire-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-prefix.pch"; sourceTree = "<group>"; };
 		45DF82A89F0A4F3BFCDFBD05202214E0 /* Pods-SportsApp-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SportsApp-frameworks.sh"; sourceTree = "<group>"; };
 		485C809AE647DE6BDBD7AB6441029294 /* AlamofireSwiftyJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AlamofireSwiftyJSON-prefix.pch"; sourceTree = "<group>"; };
-		487AD98DE3D4772F873C4A9FB04F3F02 /* Pods-SportsApp */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-SportsApp"; path = Pods_SportsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		487AD98DE3D4772F873C4A9FB04F3F02 /* Pods_SportsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SportsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B210BFC433DAD54F1F3407403E5A802 /* Pods-SportsAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SportsAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4B4838010A2FF7C7BAD074CCCB2A8969 /* Pods-SportsApp-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SportsApp-dummy.m"; sourceTree = "<group>"; };
 		4B6C8ADE6265543349B9C498AC4E7006 /* Pods-SportsAppTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SportsAppTests.modulemap"; sourceTree = "<group>"; };
@@ -494,7 +494,7 @@
 				5D797E9A5C5782CE845840781FA1CC81 /* Alamofire.framework */,
 				CDDCDEC91B30F96F1946198198F89F67 /* AlamofireSwiftyJSON.framework */,
 				C3F44C782D64D7EB20B61CE3844EBFAD /* Kingfisher.framework */,
-				487AD98DE3D4772F873C4A9FB04F3F02 /* Pods-SportsApp */,
+				487AD98DE3D4772F873C4A9FB04F3F02 /* Pods_SportsApp.framework */,
 				2602BF2060D79AE74A00D1EB54790FD2 /* Pods-SportsApp-SportsAppUITests */,
 				210145AFCC202E65925AF492642900B1 /* Pods-SportsAppTests */,
 				E23C076BA70925415F490FEDB215DA92 /* SwiftyJSON.framework */,
@@ -699,7 +699,7 @@
 			);
 			name = "Pods-SportsApp";
 			productName = Pods_SportsApp;
-			productReference = 487AD98DE3D4772F873C4A9FB04F3F02 /* Pods-SportsApp */;
+			productReference = 487AD98DE3D4772F873C4A9FB04F3F02 /* Pods_SportsApp.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		77370B3D0D2489E29710C4E132C3B714 /* Pods-SportsAppTests */ = {
@@ -1181,7 +1181,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Target Support Files/Pods-SportsApp/Pods-SportsApp-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1491,7 +1491,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Target Support Files/Pods-SportsApp/Pods-SportsApp-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
