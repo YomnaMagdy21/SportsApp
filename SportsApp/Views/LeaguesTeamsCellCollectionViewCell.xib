@@ -42,8 +42,8 @@
             </constraints>
             <size key="customSize" width="150" height="158"/>
             <connections>
-                <outlet property="teamImage" destination="ltK-NY-qsk" id="SBb-2F-gFs"/>
-                <outlet property="teamName" destination="W4S-ir-7aE" id="6YX-Kc-FLq"/>
+                <outlet property="teamImage" destination="ltK-NY-qsk" id="yNb-RL-Tj1"/>
+                <outlet property="teamName" destination="W4S-ir-7aE" id="O2f-rv-jJI"/>
             </connections>
             <point key="canvasLocation" x="3.0534351145038165" y="112.67605633802818"/>
         </collectionViewCell>

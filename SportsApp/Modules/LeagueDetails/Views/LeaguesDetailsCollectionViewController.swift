@@ -11,9 +11,20 @@ private let reuseIdentifier = "CustomCell"
 private let teamsCellReuseIdentifier = "TeamsCell"
 
 class LeaguesDetailsCollectionViewController: UICollectionViewController {
-    
+    var leagueDetailsViewModel:LeaguesDetailsViewModel?
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        leagueDetailsViewModel = LeaguesDetailsViewModel()
+        leagueDetailsViewModel?.bindTeamsLeague = { [weak self] in 
+                            DispatchQueue.main.async {
+                                self?.collectionView.reloadData() 
+                                print(self?.leagueDetailsViewModel?.teams?.first?.team_name ?? "empty")
+                            }
+            
+        }
+        leagueDetailsViewModel?.fetchTeams(leagueId: 152)
+
         
         let upcomingEventsNib = UINib(nibName: "LeaguesUpCommingEventsCollectionViewCell", bundle: nil)
         self.collectionView!.register(upcomingEventsNib, forCellWithReuseIdentifier: reuseIdentifier)
@@ -100,9 +111,15 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10 
+        switch section {
+        case 0, 2:
+            return 1// Assuming one item for the top and bottom sections
+        case 1:
+            return leagueDetailsViewModel?.teams?.count ?? 0 // Return count of teams array for the second section
+        default:
+            fatalError("Unexpected section")
+        }
     }
-    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
@@ -113,8 +130,20 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: teamsCellReuseIdentifier, for: indexPath) as! LeaguesTeamsCellCollectionViewCell
             // Configure the custom cell
-            let imageUrl = URL(string: "https://www.freevector.com/uploads/vector/preview/14053/FreeVector-Real-Madrid-FC.jpg")!
-            cell.configure(with: imageUrl)
+//            let imageUrl = URL(string: "https://www.freevector.com/uploads/vector/preview/14053/FreeVector-Real-Madrid-FC.jpg")!
+//            cell.configure(with: imageUrl)
+//            cell.teamName.text = "omar"
+            
+            if let team = leagueDetailsViewModel?.teams?[indexPath.row] {
+                if let imageUrlString = team.team_logo, let imageUrl = URL(string: imageUrlString) {
+                    cell.configure(with: imageUrl)
+                    cell.teamName.text = team.team_name
+                    print(team.team_name ?? "")
+                } else {
+                    // Handle missing or invalid image URL
+                }
+            }
+
             return cell
         case 2:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LeaguesUpCommingEventsCollectionViewCell
