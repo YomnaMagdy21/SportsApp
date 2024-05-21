@@ -1,29 +1,29 @@
 import Foundation
 
 // MARK: - Welcome1
-struct LeagueTeamsResponse: Decodable {
+struct LeagueTeamsResponse: Codable {
     let success: Int
     let result: [Result]?
 }
 
 // MARK: - Result
-struct Result: Decodable {
-    let teamKey: Int?
-    let teamName: String?
-    let teamLogo: String?
+struct Result: Codable {
+    let team_key: Int?
+    let team_name: String?
+    let team_logo: String?
     let players: [Player]?
     let coaches: [Coach]?
 }
 
 // MARK: - Coach
-struct Coach: Decodable {
+struct Coach: Codable {
     let coachName: String?
     let coachCountry: String?
     let coachAge: String?
 }
 
 // MARK: - Player
-struct Player: Decodable {
+struct Player: Codable {
     let playerKey: Int?
     let playerImage: String?
     let playerName: String?
@@ -66,12 +66,12 @@ struct Player: Decodable {
     let playerWoordworks: String?
     let playerRating: String?
 
-    enum PlayerInjured: String, Decodable {
+    enum PlayerInjured: String, Codable {
         case no = "No"
         case yes = "Yes"
     }
     
-    enum PlayerType: String, Decodable {
+    enum PlayerType: String, Codable {
         case defenders
         case forwards
         case goalkeepers

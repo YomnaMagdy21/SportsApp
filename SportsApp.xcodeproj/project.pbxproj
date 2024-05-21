@@ -164,7 +164,6 @@
 		07D0E9C92BF91FD9003F0DCC /* Servces */ = {
 			isa = PBXGroup;
 			children = (
-				07D0E9CA2BF92044003F0DCC /* NetworkServices.swift */,
 			);
 			path = Servces;
 			sourceTree = "<group>";
@@ -247,6 +246,7 @@
 		472AE0032BF537B0000C97FF /* SportsApp */ = {
 			isa = PBXGroup;
 			children = (
+				07D0E9CA2BF92044003F0DCC /* NetworkServices.swift */,
 				07D0E9D12BF9213F003F0DCC /* Modules */,
 				07D0E9CC2BF920A1003F0DCC /* Utilities */,
 				07D0E9C92BF91FD9003F0DCC /* Servces */,

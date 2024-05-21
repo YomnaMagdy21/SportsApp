@@ -28,7 +28,7 @@ class NetworkServices : NetworkServicesProtocol{
             switch response.result {
             case .success(let data):
                 do {
-//                    print("Received data: \(String(data: data, encoding: .utf8) ?? "Empty data")")
+                    print("Received data: \(String(data: data, encoding: .utf8) ?? "Empty data")")
                     let teamsResponseDecoded = try JSONDecoder().decode(LeagueTeamsResponse.self, from: data)
                     completion(teamsResponseDecoded, nil)
 //                    print(teamsResponseDecoded)

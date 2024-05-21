@@ -11,25 +11,19 @@ private let reuseIdentifier = "CustomCell"
 private let teamsCellReuseIdentifier = "TeamsCell"
 
 class LeaguesDetailsCollectionViewController: UICollectionViewController {
-    var teams: [Result]?
+    var leagueDetailsViewModel:LeaguesDetailsViewModel?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        let networkService = NetworkServices()
-
-        networkService.fetchTeamsData(leagueId: 152) { response, error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-                // Handle the error
-            } else if let response = response {
-                self.teams = response.result
-                print(response.result?.count ?? -1)
-                print(self.teams?.count ?? -1)
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData() // Reload collection view after data is assigned
-                }
-            }
+        leagueDetailsViewModel = LeaguesDetailsViewModel()
+        leagueDetailsViewModel?.bindTeamsLeague = { [weak self] in 
+                            DispatchQueue.main.async {
+                                self?.collectionView.reloadData() 
+                                print(self?.leagueDetailsViewModel?.teams?.first?.team_name ?? "empty")
+                            }
+            
         }
-
+        leagueDetailsViewModel?.fetchTeams(leagueId: 152)
 
         
         let upcomingEventsNib = UINib(nibName: "LeaguesUpCommingEventsCollectionViewCell", bundle: nil)
@@ -121,7 +115,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
         case 0, 2:
             return 1// Assuming one item for the top and bottom sections
         case 1:
-            return teams?.count ?? 0 // Return count of teams array for the second section
+            return leagueDetailsViewModel?.teams?.count ?? 0 // Return count of teams array for the second section
         default:
             fatalError("Unexpected section")
         }
@@ -138,10 +132,13 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
             // Configure the custom cell
 //            let imageUrl = URL(string: "https://www.freevector.com/uploads/vector/preview/14053/FreeVector-Real-Madrid-FC.jpg")!
 //            cell.configure(with: imageUrl)
-            if let team = teams?[indexPath.row] {
-                if let imageUrlString = team.teamLogo, let imageUrl = URL(string: imageUrlString) {
+//            cell.teamName.text = "omar"
+            
+            if let team = leagueDetailsViewModel?.teams?[indexPath.row] {
+                if let imageUrlString = team.team_logo, let imageUrl = URL(string: imageUrlString) {
                     cell.configure(with: imageUrl)
-                    cell.teamName.text = team.teamName // Set the team name
+                    cell.teamName.text = team.team_name
+                    print(team.team_name ?? "")
                 } else {
                     // Handle missing or invalid image URL
                 }
