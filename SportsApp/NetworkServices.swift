@@ -10,6 +10,7 @@ import Alamofire
 import SwiftyJSON
 protocol NetworkServicesProtocol {
     func fetchTeamsData(leagueId: Int, completion: @escaping (LeagueTeamsResponse?, Error?) -> Void)
+    func fetchLeaguesData(sportType : String,compilitionHandler : @escaping (Leagues?,Error?)-> Void)
 
 }
 
@@ -37,6 +38,23 @@ class NetworkServices : NetworkServicesProtocol{
                 }
             case .failure(let error):
                 completion(nil, error)
+            }
+        }
+    }
+    
+    func fetchLeaguesData(sportType: String, compilitionHandler completionHandler: @escaping (Leagues?, Error?) -> Void) {
+        let url = "https://apiv2.allsportsapi.com/\(sportType)?met=Leagues&APIkey=\(apiKey)"
+        Alamofire.request(url).responseData { response in
+            switch response.result {
+            case .success(let data):
+                do {
+                    let leagues = try JSONDecoder().decode(Leagues.self, from: data)
+                    completionHandler(leagues, nil)
+                } catch {
+                    completionHandler(nil, error)
+                }
+            case .failure(let error):
+                completionHandler(nil, error)
             }
         }
     }

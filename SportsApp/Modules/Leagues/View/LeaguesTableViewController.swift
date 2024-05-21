@@ -9,7 +9,11 @@ import UIKit
 import SafariServices
 
 class LeaguesTableViewController: UITableViewController ,SFSafariViewControllerDelegate{
-
+    
+    var league : [League]?
+    var leagueViewModel : LeaguesViewModel?
+    var sportType : String?
+    var indicator : UIActivityIndicatorView?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,6 +22,21 @@ class LeaguesTableViewController: UITableViewController ,SFSafariViewControllerD
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        leagueViewModel = LeaguesViewModel()
+        leagueViewModel?.bindResultToViewController = { [weak self] in
+                   DispatchQueue.main.async {
+                       self?.league = self?.leagueViewModel?.result
+                       self?.indicator?.stopAnimating()
+                       
+                       self?.tableView.reloadData()
+                   }
+               }
+        indicator = UIActivityIndicatorView(style: .medium)
+                  indicator!.center = view.center
+                  indicator!.startAnimating()
+                 view.addSubview(indicator!)
+        leagueViewModel?.getLeaguesData(sportName: sportType ?? "football")
     }
 
     // MARK: - Table view data source
@@ -40,17 +59,20 @@ class LeaguesTableViewController: UITableViewController ,SFSafariViewControllerD
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 10
+        return league?.count ?? 0
     }
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "league", for: indexPath) as! TableViewCell
+//        
+//        let imageUrl = URL(string: "https://i.ebayimg.com/images/g/nMIAAOSwi15kY5HN/s-l1600.jpg")
+//        cell.imgLeague.kf.setImage(with: imageUrl)
+//        cell.TitleLeague.text = "title"
+        cell.TitleLeague.text = self.league?[indexPath.row].league_name
+        let imgUrl = URL(string: self.league?[indexPath.row].league_logo ?? "")
+        cell.imgLeague.kf.setImage(with: imgUrl, placeholder: UIImage(named: "loading.jpeg"))
         
-        let imageUrl = URL(string: "https://i.ebayimg.com/images/g/nMIAAOSwi15kY5HN/s-l1600.jpg")
-        cell.imgLeague.kf.setImage(with: imageUrl)
-        cell.TitleLeague.text = "title"
-
         return cell
     }
     
