@@ -41,7 +41,7 @@ class NetworkServices : NetworkServicesProtocol{
             }
         }
     }
-    
+   //leagues
     func fetchLeaguesData(sportType: String, compilitionHandler completionHandler: @escaping (Leagues?, Error?) -> Void) {
         let url = "https://apiv2.allsportsapi.com/\(sportType)?met=Leagues&APIkey=\(apiKey)"
         Alamofire.request(url).responseData { response in
@@ -58,5 +58,6 @@ class NetworkServices : NetworkServicesProtocol{
             }
         }
     }
+    
 
 }
