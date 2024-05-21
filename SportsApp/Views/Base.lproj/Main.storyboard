@@ -71,7 +71,6 @@
                                         <connections>
                                             <outlet property="img" destination="N1I-NR-p3t" id="oft-m6-NyE"/>
                                             <outlet property="title" destination="LeM-gT-6Yx" id="Nqx-aJ-0CV"/>
-                                            <segue destination="Hji-9q-4ef" kind="show" identifier="goToLeague" id="FpJ-Yw-fvX"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -309,7 +308,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="heart" catalog="system" width="128" height="107"/>
+        <image name="heart" catalog="system" width="32" height="32"/>
         <image name="sportscourt" catalog="system" width="128" height="83"/>
         <image name="youtube" width="1200" height="1200"/>
         <systemColor name="systemBackgroundColor">

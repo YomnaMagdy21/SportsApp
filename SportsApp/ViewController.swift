@@ -50,28 +50,14 @@ class ViewController: UIViewController , UICollectionViewDelegate, UICollectionV
         return CGSize(width: view.frame.width/2.4, height: view.frame.width/2)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//            print("Item selected at indexPath: \(indexPath)")
-        
-            performSegue(withIdentifier: "goToLeague", sender: indexPath)
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                if let leagueTVC = storyboard.instantiateViewController(withIdentifier: "leaguesTVC") as? LeaguesTableViewController {
-//                    leagueTVC.sportType = names[indexPath.row]
-////                    leagueTVC.modalPresentationStyle = .fullScreen
-//
-//                    self.present(leagueTVC, animated: true, completion: nil)
-//                }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+               if let leagueTVC = storyboard.instantiateViewController(withIdentifier: "leaguesTVC") as? LeaguesTableViewController{
+                   leagueTVC.sportType = names[indexPath.row]
+                   self.navigationController?.pushViewController(leagueTVC, animated: true)
+               }
+///
         }
-        
-        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == "goToLeague" {
-                if let indexPath = sender as? IndexPath {
-                    if let leaguesTVC = segue.destination as? LeaguesTableViewController {
-                        leaguesTVC.sportType = names[indexPath.row]
-                    }
-                }
-            }
-        
-    }
+
 
 }
 
