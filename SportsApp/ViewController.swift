@@ -10,6 +10,9 @@ import UIKit
 class ViewController: UIViewController , UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     @IBOutlet weak var collectionView: UICollectionView!
+    var names : [String] = ["football","basketball","cricket","tennis"]
+    var images : [String] = ["football","basketball","cricket","tennis"]
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -29,12 +32,14 @@ class ViewController: UIViewController , UICollectionViewDelegate, UICollectionV
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return names.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! HomeCollectionViewCell
-        cell.img.image = UIImage(named: "r.png")
+        cell.img.image = UIImage(named: images[indexPath.row])
+        cell.title.text = names[indexPath.row]
+      
         
         return cell
     
@@ -44,11 +49,15 @@ class ViewController: UIViewController , UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width/2.4, height: view.frame.width/2)
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        // Get the new view controller using segue.destination.
-//        // Pass the selected object to the new view controller.
-//    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+               if let leagueTVC = storyboard.instantiateViewController(withIdentifier: "leaguesTVC") as? LeaguesTableViewController{
+                   leagueTVC.sportType = names[indexPath.row]
+                   self.navigationController?.pushViewController(leagueTVC, animated: true)
+               }
+///
+        }
+
 
 }
 
