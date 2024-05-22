@@ -25,8 +25,8 @@ struct Coach: Codable {
 // MARK: - Player
 struct Player: Codable {
     let playerKey: Int?
-    let playerImage: String?
-    let playerName: String?
+    let player_image: String?
+    let player_name: String?
     let playerNumber: String?
     let playerCountry: String?
     let playerType: PlayerType?

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IMl-iy-JLG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1CW-SU-UP0">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
@@ -31,7 +31,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="28" y="-27"/>
+            <point key="canvasLocation" x="-1450" y="142"/>
         </scene>
         <!--Leagues Details Collection View Controller-->
         <scene sceneID="6w8-Ur-3GA">
@@ -62,15 +62,16 @@
                             <outlet property="delegate" destination="IMl-iy-JLG" id="YwG-eq-Bke"/>
                         </connections>
                     </collectionView>
+                    <navigationItem key="navigationItem" id="Pi2-Mo-CzW"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wg5-19-iyZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="815" y="-27"/>
+            <point key="canvasLocation" x="1741.2213740458014" y="-27.464788732394368"/>
         </scene>
         <!--Team Detail Collection View Controller-->
         <scene sceneID="8gG-ZS-lCQ">
             <objects>
-                <collectionViewController id="Z1X-DN-44r" customClass="TeamDetailCollectionViewController" customModule="SportsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="TeamDetailCollectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Z1X-DN-44r" customClass="TeamDetailCollectionViewController" customModule="SportsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="YEE-vh-qoo">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -99,7 +100,25 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zff-mn-tBY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1574" y="-75"/>
+            <point key="canvasLocation" x="2500" y="-75.352112676056336"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3zG-VI-NNS">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1CW-SU-UP0" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wrd-lk-0ih">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="IMl-iy-JLG" kind="relationship" relationship="rootViewController" id="ZSo-G7-yz9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r4n-hj-pGP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="814.50381679389307" y="-27.464788732394368"/>
         </scene>
     </scenes>
     <resources>

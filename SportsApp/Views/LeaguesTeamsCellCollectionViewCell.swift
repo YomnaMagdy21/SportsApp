@@ -24,7 +24,8 @@ class LeaguesTeamsCellCollectionViewCell: UICollectionViewCell {
     
     func configure(with imageUrl: URL) {
         // Load image using Kingfisher
-        teamImage.kf.setImage(with: imageUrl)
+        let placeholderImage = UIImage(named: "barcelona") 
+               teamImage.kf.setImage(with: imageUrl, placeholder: placeholderImage)
     }
 
 }
