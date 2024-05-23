@@ -15,7 +15,8 @@ class LeaguesTeamsCellCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
+        setupUI()
+
         // Make the image view circular
         teamImage.layer.cornerRadius = teamImage.frame.size.height / 2
 //        teamImage.layer.cornerRadius = teamImage.frame.size.width / 2
@@ -27,5 +28,16 @@ class LeaguesTeamsCellCollectionViewCell: UICollectionViewCell {
         let placeholderImage = UIImage(named: "barcelona") 
                teamImage.kf.setImage(with: imageUrl, placeholder: placeholderImage)
     }
+    private func setupUI() {
+         // Set border color and width
+        self.layer.borderColor = UIColor(hex: "#006400", alpha: 0.8).cgColor
+         self.layer.borderWidth = 1.0
+         
+         // Set corner radius
+         self.layer.cornerRadius = 10.0
+         
+         // Clip to bounds to apply the corner radius
+         self.clipsToBounds = true
+     }
 
 }

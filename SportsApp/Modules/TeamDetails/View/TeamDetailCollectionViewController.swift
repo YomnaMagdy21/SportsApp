@@ -49,9 +49,10 @@ class TeamDetailCollectionViewController: UICollectionViewController {
             case 0:
                 return self.drawTheTopSection()
             case 1:
-                return self.drawTheMiddleSection()
-            case 2:
                 return self.drawTheBottomSection()
+            case 2:
+                return self.drawTheMiddleSection()
+
             default:
                 return nil
             }
@@ -87,7 +88,7 @@ class TeamDetailCollectionViewController: UICollectionViewController {
     func drawTheBottomSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.4))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.1))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
         let section = NSCollectionLayoutSection(group: group)
@@ -102,9 +103,9 @@ class TeamDetailCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
-        case 0, 2:
+        case 0, 1:
             return 1
-        case 1:
+        case 2:
             return teamDetailsViewModel?.teams?.first?.players?.count ?? 0 // Change this to the number of items you want for the middle section
         default:
             return 0
@@ -122,6 +123,14 @@ class TeamDetailCollectionViewController: UICollectionViewController {
             
             return cell
         case 1:
+    
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: bottomSectionReuseIdentifier, for: indexPath) as! TeamDetailsBottomSectionCollectionViewCell
+            // Configure the custom cell for the bottom section
+            // cell.customLabel.text = "Bottom Item \(indexPath.row + 1)"
+            cell.coachNameLabel.text = teamDetailsViewModel?.teams?.first?.coaches?.first?.coach_name
+            return cell
+        case 2:
+           
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: teamsCellReuseIdentifier, for: indexPath) as! LeaguesTeamsCellCollectionViewCell
             // Configure the custom cell
 //            let imageUrl = URL(string: "https://www.fifarosters.com/assets/players/fifa24/faces/209331.png")!
@@ -136,11 +145,6 @@ class TeamDetailCollectionViewController: UICollectionViewController {
                     // Handle missing or invalid image URL
                 }
             }
-            return cell
-        case 2:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: bottomSectionReuseIdentifier, for: indexPath) as! TeamDetailsBottomSectionCollectionViewCell
-            // Configure the custom cell for the bottom section
-            // cell.customLabel.text = "Bottom Item \(indexPath.row + 1)"
             return cell
         default:
             fatalError("Unexpected section")

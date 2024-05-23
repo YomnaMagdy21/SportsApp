@@ -9,6 +9,7 @@ import UIKit
 
 class TeamDetailsBottomSectionCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var coachNameLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

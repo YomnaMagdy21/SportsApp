@@ -17,8 +17,8 @@ struct Result: Codable {
 
 // MARK: - Coach
 struct Coach: Codable {
-    let coachName: String?
-    let coachCountry: String?
+    let coach_name: String?
+    let coach_country: String?
     let coachAge: String?
 }
 

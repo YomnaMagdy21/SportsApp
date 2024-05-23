@@ -33,6 +33,7 @@
 		07D99F2A2BFD54AF00E9DCE4 /* NetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D99F292BFD54AF00E9DCE4 /* NetworkServices.swift */; };
 		07D99F2B2BFD54AF00E9DCE4 /* NetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D99F292BFD54AF00E9DCE4 /* NetworkServices.swift */; };
 		07D99F2C2BFD54AF00E9DCE4 /* NetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D99F292BFD54AF00E9DCE4 /* NetworkServices.swift */; };
+		07E157122BFFC86700FA8A7E /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E157112BFFC86700FA8A7E /* ColorUtils.swift */; };
 		0DD5207BE452B94D78EB0CFE /* Pods_SportsApp_SportsAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B306712C354524608859E1 /* Pods_SportsApp_SportsAppUITests.framework */; };
 		472AE0052BF537B0000C97FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472AE0042BF537B0000C97FF /* AppDelegate.swift */; };
 		472AE0072BF537B0000C97FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472AE0062BF537B0000C97FF /* SceneDelegate.swift */; };
@@ -93,6 +94,7 @@
 		07D73D032BFE81B800DC5EA6 /* TeamDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TeamDetailsViewModel.swift; path = ../../../../../../../TeamDetailsViewModel.swift; sourceTree = "<group>"; };
 		07D99F1E2BFD4AA100E9DCE4 /* DbServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbServices.swift; sourceTree = "<group>"; };
 		07D99F292BFD54AF00E9DCE4 /* NetworkServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServices.swift; sourceTree = "<group>"; };
+		07E157112BFFC86700FA8A7E /* ColorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUtils.swift; sourceTree = "<group>"; };
 		0EDE2F6250843695AB1BEEA2 /* Pods-SportsApp-SportsAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SportsApp-SportsAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-SportsApp-SportsAppUITests/Pods-SportsApp-SportsAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		168A021EBFD3253A9D162A03 /* Pods-SportsApp-SportsAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SportsApp-SportsAppUITests.release.xcconfig"; path = "Target Support Files/Pods-SportsApp-SportsAppUITests/Pods-SportsApp-SportsAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		472AE0012BF537B0000C97FF /* SportsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SportsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				07D0E9CD2BF920E2003F0DCC /* NetworkUtils.swift */,
+				07E157112BFFC86700FA8A7E /* ColorUtils.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -615,6 +618,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07E157122BFFC86700FA8A7E /* ColorUtils.swift in Sources */,
 				47D42A232BF6986D007E83C4 /* HomeCollectionViewCell.swift in Sources */,
 				4793D77B2BF7DE03007A84A8 /* TableViewCell.swift in Sources */,
 				472AE0092BF537B0000C97FF /* ViewController.swift in Sources */,
