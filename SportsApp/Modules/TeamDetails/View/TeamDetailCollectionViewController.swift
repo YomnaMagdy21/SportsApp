@@ -13,10 +13,22 @@ private let teamsCellReuseIdentifier = "TeamsCell"
 private let bottomSectionReuseIdentifier = "BottomSectionCell"
 
 class TeamDetailCollectionViewController: UICollectionViewController {
+    var teamDetailsViewModel:TeamDetailsViewModel?
+    var teamKey: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        teamDetailsViewModel = TeamDetailsViewModel()
+        teamDetailsViewModel?.bindTeamDetails = { [weak self] in
+                            DispatchQueue.main.async {
+                                self?.collectionView.reloadData()
+                                //print(self?.leagueDetailsViewModel?.teams?.first?.team_name ?? "empty")
+                              //  print(self?.teamDetailsViewModel?.teams?.first?.players?.first?.player_name ?? "empy name")
+                                print(self?.teamDetailsViewModel?.teams?.first?.players?.count ?? -1)
+                            }
+            
+        }
+        teamDetailsViewModel?.fetchTeamDetails(teamId: teamKey ?? -1)
         // Register custom cells
         let upcomingEventsNib = UINib(nibName: "TeamDetailsTopSectionCollectionViewCell", bundle: nil)
         self.collectionView!.register(upcomingEventsNib, forCellWithReuseIdentifier: reuseIdentifier)
@@ -37,9 +49,10 @@ class TeamDetailCollectionViewController: UICollectionViewController {
             case 0:
                 return self.drawTheTopSection()
             case 1:
-                return self.drawTheMiddleSection()
-            case 2:
                 return self.drawTheBottomSection()
+            case 2:
+                return self.drawTheMiddleSection()
+
             default:
                 return nil
             }
@@ -75,7 +88,7 @@ class TeamDetailCollectionViewController: UICollectionViewController {
     func drawTheBottomSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.4))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.1))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
         let section = NSCollectionLayoutSection(group: group)
@@ -90,10 +103,10 @@ class TeamDetailCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
-        case 0, 2:
+        case 0, 1:
             return 1
-        case 1:
-            return 10 // Change this to the number of items you want for the middle section
+        case 2:
+            return teamDetailsViewModel?.teams?.first?.players?.count ?? 0 // Change this to the number of items you want for the middle section
         default:
             return 0
         }
@@ -105,18 +118,33 @@ class TeamDetailCollectionViewController: UICollectionViewController {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! TeamDetailsTopSectionCollectionViewCell
             // Configure the custom cell
             // cell.customLabel.text = "Item \(indexPath.row + 1)"
+            cell.configure(with: teamDetailsViewModel?.teams?.first?.team_name, logoUrl: teamDetailsViewModel?.teams?.first?.team_logo)
+          
+            
             return cell
         case 1:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: teamsCellReuseIdentifier, for: indexPath) as! LeaguesTeamsCellCollectionViewCell
-            // Configure the custom cell
-            let imageUrl = URL(string: "https://www.fifarosters.com/assets/players/fifa24/faces/209331.png")!
-            cell.configure(with: imageUrl)
-            cell.teamName.text = "Mohamed Salah"
-            return cell
-        case 2:
+    
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: bottomSectionReuseIdentifier, for: indexPath) as! TeamDetailsBottomSectionCollectionViewCell
             // Configure the custom cell for the bottom section
             // cell.customLabel.text = "Bottom Item \(indexPath.row + 1)"
+            cell.coachNameLabel.text = teamDetailsViewModel?.teams?.first?.coaches?.first?.coach_name
+            return cell
+        case 2:
+           
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: teamsCellReuseIdentifier, for: indexPath) as! LeaguesTeamsCellCollectionViewCell
+            // Configure the custom cell
+//            let imageUrl = URL(string: "https://www.fifarosters.com/assets/players/fifa24/faces/209331.png")!
+//            cell.configure(with: imageUrl)
+//            cell.teamName.text = "Mohamed Salah"
+            if let player = teamDetailsViewModel?.teams?.first?.players?[indexPath.row] {
+                if let imageUrlString = player.player_image, let imageUrl = URL(string: imageUrlString) {
+                    cell.configure(with: imageUrl)
+                    cell.teamName.text = player.player_name
+//                    print(team.team_name ?? "")
+                } else {
+                    // Handle missing or invalid image URL
+                }
+            }
             return cell
         default:
             fatalError("Unexpected section")
