@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9jm-ke-rVb">
-                                <rect key="frame" x="28" y="142.66666666666663" width="337" height="587"/>
+                                <rect key="frame" x="22" y="231.66666666666663" width="349" height="409"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="arn-xi-iQc">
                                     <size key="itemSize" width="129" height="182"/>
@@ -41,7 +41,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="129" height="127"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LeM-gT-6Yx">
-                                                            <rect key="frame" x="0.0" y="143" width="121" height="35"/>
+                                                            <rect key="frame" x="0.0" y="135" width="121" height="43"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -52,7 +52,7 @@
                                                         <constraint firstAttribute="trailing" secondItem="LeM-gT-6Yx" secondAttribute="trailing" constant="8" id="DMo-fV-kbM"/>
                                                         <constraint firstItem="N1I-NR-p3t" firstAttribute="leading" secondItem="oxD-TN-wGo" secondAttribute="leading" id="I6y-mL-peZ"/>
                                                         <constraint firstAttribute="bottom" secondItem="N1I-NR-p3t" secondAttribute="bottom" constant="55" id="Mfd-cS-9Ew"/>
-                                                        <constraint firstItem="LeM-gT-6Yx" firstAttribute="top" secondItem="N1I-NR-p3t" secondAttribute="bottom" constant="16" id="Vbx-mA-Fhh"/>
+                                                        <constraint firstItem="LeM-gT-6Yx" firstAttribute="top" secondItem="N1I-NR-p3t" secondAttribute="bottom" constant="8" id="Vbx-mA-Fhh"/>
                                                         <constraint firstAttribute="bottom" secondItem="LeM-gT-6Yx" secondAttribute="bottom" constant="4" id="ZPd-3k-0V9"/>
                                                         <constraint firstAttribute="trailing" secondItem="N1I-NR-p3t" secondAttribute="trailing" id="e5v-Xy-5O1"/>
                                                         <constraint firstItem="N1I-NR-p3t" firstAttribute="top" secondItem="oxD-TN-wGo" secondAttribute="top" id="nvm-pX-DIw"/>
@@ -80,9 +80,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="9jm-ke-rVb" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="Lvk-0Q-Vsv"/>
-                            <constraint firstItem="9jm-ke-rVb" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.857506" id="eh9-tW-4uw"/>
-                            <constraint firstItem="9jm-ke-rVb" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.688967" id="fnE-o7-Lnp"/>
+                            <constraint firstItem="9jm-ke-rVb" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.888041" id="TCG-Sx-HtU"/>
                             <constraint firstItem="9jm-ke-rVb" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="yBS-pw-dvV"/>
+                            <constraint firstItem="9jm-ke-rVb" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.480047" id="zbO-Pe-ZC2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Sports" id="ylG-AS-3Uo"/>
@@ -308,7 +308,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="heart" catalog="system" width="32" height="32"/>
+        <image name="heart" catalog="system" width="128" height="107"/>
         <image name="sportscourt" catalog="system" width="128" height="83"/>
         <image name="youtube" width="1200" height="1200"/>
         <systemColor name="systemBackgroundColor">

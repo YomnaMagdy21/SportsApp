@@ -192,6 +192,8 @@
 		07D0E9D12BF9213F003F0DCC /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				471DA9942BFFF1BD0079E491 /* Favorite */,
+				471DA9922BFFF1410079E491 /* Home */,
 				07D73D002BFE7F7A00DC5EA6 /* TeamDetails */,
 				47BA91092BFA8CAC008FED0F /* Leagues */,
 				07D0E9D22BF9215A003F0DCC /* LeagueDetails */,
@@ -274,6 +276,40 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		471DA9922BFFF1410079E491 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				471DA9932BFFF1570079E491 /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		471DA9932BFFF1570079E491 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				472AE0082BF537B0000C97FF /* ViewController.swift */,
+				47D42A222BF6986D007E83C4 /* HomeCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		471DA9942BFFF1BD0079E491 /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				471DA9952BFFF1CF0079E491 /* View */,
+			);
+			path = Favorite;
+			sourceTree = "<group>";
+		};
+		471DA9952BFFF1CF0079E491 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				47A0EA2B2BF6D74000158DD0 /* FavTableViewController.swift */,
+				47C67DAC2BF80BE300046002 /* FavTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		472ADFF82BF537B0000C97FF = {
 			isa = PBXGroup;
 			children = (
@@ -306,16 +342,11 @@
 				075E46E32BF5434D0025A082 /* Views */,
 				472AE0042BF537B0000C97FF /* AppDelegate.swift */,
 				472AE0062BF537B0000C97FF /* SceneDelegate.swift */,
-				472AE0082BF537B0000C97FF /* ViewController.swift */,
 				472AE0102BF537B4000C97FF /* Assets.xcassets */,
 				472AE0122BF537B4000C97FF /* LaunchScreen.storyboard */,
 				472AE0152BF537B4000C97FF /* Info.plist */,
 				472AE00D2BF537B0000C97FF /* SportsApp.xcdatamodeld */,
 				07CF75AF2BF7FFD100731DC3 /* SectionHeaderView.swift */,
-				47D42A222BF6986D007E83C4 /* HomeCollectionViewCell.swift */,
-				47A0EA2B2BF6D74000158DD0 /* FavTableViewController.swift */,
-				4793D77A2BF7DE03007A84A8 /* TableViewCell.swift */,
-				47C67DAC2BF80BE300046002 /* FavTableViewCell.swift */,
 			);
 			path = SportsApp;
 			sourceTree = "<group>";
@@ -350,6 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				4786CD362BF77D65009D4BD8 /* LeaguesTableViewController.swift */,
+				4793D77A2BF7DE03007A84A8 /* TableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
