@@ -16,6 +16,10 @@ class LeaguesDetailsViewModel{
             print(teams?.first?.team_name ?? "empty")
         }
     }
+    
+    var bindUpcomingEvent : (() -> ()) = {}
+    var upcomingResult : [UpcomingData]?
+    
     func fetchTeams(leagueId: Int){
         networkService.fetchTeamsData(leagueId: leagueId) { response, error in
             if let error = error {
@@ -35,6 +39,21 @@ class LeaguesDetailsViewModel{
         }
 
     }
+    
+    func getUpcomingResult(sportName: String,leagueId: Int){
+        networkService.fetchUpcomingData(sportType: sportName,leagueId: leagueId){[weak self] (upcoming, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            self?.upcomingResult = upcoming?.result
+            print(self?.upcomingResult?.first?.event_final_result ?? "no result")
+        
+            self?.bindUpcomingEvent()
+            
+        }
+    }
+    
     
     
 }

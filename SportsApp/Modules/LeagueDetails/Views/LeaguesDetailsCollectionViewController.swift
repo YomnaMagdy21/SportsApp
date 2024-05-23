@@ -12,6 +12,8 @@ private let teamsCellReuseIdentifier = "TeamsCell"
 
 class LeaguesDetailsCollectionViewController: UICollectionViewController {
     var leagueDetailsViewModel:LeaguesDetailsViewModel?
+    
+    var upcoming : [UpcomingData]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,15 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
         }
         leagueDetailsViewModel?.fetchTeams(leagueId: 152)
 
+        leagueDetailsViewModel?.bindUpcomingEvent = {[weak self] in
+            DispatchQueue.main.async {
+                self?.upcoming = self?.leagueDetailsViewModel?.upcomingResult
+                self?.collectionView.reloadData()
+                print(self?.upcoming?.first?.country_name ?? "no contry name")
+            }
+            
+        }
+        leagueDetailsViewModel?.getUpcomingResult(sportName: "football", leagueId: 206 )
         
         let upcomingEventsNib = UINib(nibName: "LeaguesUpCommingEventsCollectionViewCell", bundle: nil)
         self.collectionView!.register(upcomingEventsNib, forCellWithReuseIdentifier: reuseIdentifier)
