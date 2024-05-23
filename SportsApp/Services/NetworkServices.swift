@@ -12,10 +12,15 @@ protocol NetworkServicesProtocol {
     func fetchTeamsData(leagueId: Int, completion: @escaping (LeagueTeamsResponse?, Error?) -> Void)
     func fetchTeamsDetails(teamId: Int, completion: @escaping (LeagueTeamsResponse?, Error?) -> Void)
     func fetchLeaguesData(sportType : String,compilitionHandler : @escaping (Leagues?,Error?)-> Void)
+    func fetchUpcomingData(sportType : String,leagueId : Int,compilitionHandler : @escaping (Events?,Error?)-> Void)
+
+    func fetchLatestEvent(sportType : String,leagueId : Int,compilitionHandler : @escaping (Events?,Error?)-> Void)
 
 }
 
 class NetworkServices : NetworkServicesProtocol{
+   
+    
     let apiKey = "f57878d825c89df62d445853dcdf0e4cfe1c1cd108eb2237ac13055246f330d6"
     func fetchTeamsData(leagueId: Int, completion: @escaping (LeagueTeamsResponse?, Error?) -> Void) {
         let url = "https://apiv2.allsportsapi.com/football/"
@@ -56,6 +61,43 @@ class NetworkServices : NetworkServicesProtocol{
                 }
             case .failure(let error):
                 completionHandler(nil, error)
+            }
+        }
+    }
+    func fetchUpcomingData(sportType: String, leagueId : Int, compilitionHandler: @escaping (Events?, Error?) -> Void) {
+        let url = "https://apiv2.allsportsapi.com/\(sportType)/?met=Fixtures&&leagueId=\(leagueId)&from=2024-05-18&to=2024-06-30&APIkey=\(apiKey)"
+        Alamofire.request(url).responseData { response in
+            switch response.result {
+            case .success(let data):
+                do {
+                    print("Received data in upcoming: \(String(data: data, encoding: .utf8) ?? "Empty data")")
+                    let upcoming = try JSONDecoder().decode(Events.self, from: data)
+                    print("after decode in upcoming\(upcoming)")
+                    compilitionHandler(upcoming, nil)
+                } catch {
+                    compilitionHandler(nil, error)
+                }
+            case .failure(let error):
+                compilitionHandler(nil, error)
+            }
+        }
+        
+    }
+    func fetchLatestEvent(sportType: String, leagueId: Int, compilitionHandler: @escaping (Events?, Error?) -> Void) {
+        let url = "https://apiv2.allsportsapi.com/\(sportType)/?met=Fixtures&&leagueId=\(leagueId)&from=2024-02-23&to=2024-05-23&APIkey=\(apiKey)"
+        Alamofire.request(url).responseData { response in
+            switch response.result {
+            case .success(let data):
+                do {
+                    print("Received data in latest: \(String(data: data, encoding: .utf8) ?? "Empty data")")
+                    let latest = try JSONDecoder().decode(Events.self, from: data)
+                    print("after decode in latest \(latest)")
+                    compilitionHandler(latest, nil)
+                } catch {
+                    compilitionHandler(nil, error)
+                }
+            case .failure(let error):
+                compilitionHandler(nil, error)
             }
         }
     }
