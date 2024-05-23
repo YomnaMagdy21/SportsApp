@@ -6,3 +6,11 @@
 //
 
 import Foundation
+import CoreData
+
+protocol DbServices {
+    
+}
+class DbServicesImpl : DbServices{
+    
+}
