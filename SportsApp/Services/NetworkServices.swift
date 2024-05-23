@@ -10,6 +10,7 @@ import Alamofire
 import SwiftyJSON
 protocol NetworkServicesProtocol {
     func fetchTeamsData(leagueId: Int, completion: @escaping (LeagueTeamsResponse?, Error?) -> Void)
+    func fetchTeamsDetails(teamId: Int, completion: @escaping (LeagueTeamsResponse?, Error?) -> Void)
     func fetchLeaguesData(sportType : String,compilitionHandler : @escaping (Leagues?,Error?)-> Void)
     func fetchUpcomingData(sportType : String,leagueId : Int,compilitionHandler : @escaping (Events?,Error?)-> Void)
 
@@ -99,6 +100,35 @@ class NetworkServices : NetworkServicesProtocol{
                 compilitionHandler(nil, error)
             }
         }
+    }
+    
+    // fetchTeamDetails
+    func fetchTeamsDetails(teamId: Int, completion: @escaping (LeagueTeamsResponse?, Error?) -> Void)
+    {
+        let url = "https://apiv2.allsportsapi.com/football/"
+        let parameters: [String: Any] = [
+            "met": "Teams",
+            "APIkey": apiKey,
+            "teamId": teamId
+        ]
+        
+        Alamofire.request(url, parameters: parameters).responseData { response in
+            print(response)
+            switch response.result {
+            case .success(let data):
+                do {
+//                    print("Received data: \(String(data: data, encoding: .utf8) ?? "Empty data")")
+                    let teamsResponseDecoded = try JSONDecoder().decode(LeagueTeamsResponse.self, from: data)
+                    completion(teamsResponseDecoded, nil)
+                    print(teamsResponseDecoded)
+                } catch {
+                    completion(nil, error)
+                }
+            case .failure(let error):
+                completion(nil, error)
+            }
+        }
+        
     }
     
 

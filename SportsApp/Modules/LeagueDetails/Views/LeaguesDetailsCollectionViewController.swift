@@ -216,8 +216,12 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
         return headerView
     }
 
-
-
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+          if indexPath.section == 1, let team = leagueDetailsViewModel?.teams?[indexPath.row] {
+              navigateToTeamDetails(with: team.team_key ?? 0)
+              print("click")
+          }
+      }
 
 
 
@@ -252,6 +256,14 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
      
      }
      */
+    
+    private func navigateToTeamDetails(with teamKey: Int) {
+        let storyboard = UIStoryboard(name: "SecStoryboard", bundle: nil)
+        if let teamDetailsVC = storyboard.instantiateViewController(withIdentifier: "TeamDetailCollectionViewController") as? TeamDetailCollectionViewController {
+            teamDetailsVC.teamKey = teamKey
+            navigationController?.pushViewController(teamDetailsVC, animated: true)
+        }
+    }
     
 }
 
