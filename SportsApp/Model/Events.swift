@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct Upcoming : Decodable{
+struct Events : Decodable{
     
     var success: Int
-    var result: [UpcomingData]?
+    var result: [EventsData]?
     
 }
 
-struct UpcomingData : Decodable{
+struct EventsData : Decodable{
     
         var event_Key : Int?
         var event_date : String?

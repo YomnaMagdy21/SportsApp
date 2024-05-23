@@ -13,7 +13,8 @@ private let teamsCellReuseIdentifier = "TeamsCell"
 class LeaguesDetailsCollectionViewController: UICollectionViewController {
     var leagueDetailsViewModel:LeaguesDetailsViewModel?
     
-    var upcoming : [UpcomingData]?
+    var upcoming : [EventsData]?
+    var latest : [EventsData]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,16 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
             
         }
         leagueDetailsViewModel?.getUpcomingResult(sportName: "football", leagueId: 206 )
+        
+        leagueDetailsViewModel?.bindLatestEvent = {[weak self] in
+            DispatchQueue.main.async {
+                self?.latest = self?.leagueDetailsViewModel?.latestResult
+                self?.collectionView.reloadData()
+                print(self?.latest?.first?.event_live ?? "no event live")
+            }
+            
+        }
+        leagueDetailsViewModel?.getLatestResult(sportName: "football", leagueId: 206 )
         
         let upcomingEventsNib = UINib(nibName: "LeaguesUpCommingEventsCollectionViewCell", bundle: nil)
         self.collectionView!.register(upcomingEventsNib, forCellWithReuseIdentifier: reuseIdentifier)
@@ -123,10 +134,12 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
-        case 0, 2:
-            return 1// Assuming one item for the top and bottom sections
+        case 0:
+            return upcoming?.count ?? 1// Assuming one item for the top and bottom sections
         case 1:
             return leagueDetailsViewModel?.teams?.count ?? 0 // Return count of teams array for the second section
+        case 2:
+            return latest?.count ?? 1
         default:
             fatalError("Unexpected section")
         }
@@ -137,6 +150,15 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LeaguesUpCommingEventsCollectionViewCell
             // Configure the custom cell
             // cell.customLabel.text = "Item \(indexPath.row + 1)"
+            cell.firstTeamName.text = upcoming?[indexPath.row].event_home_team
+            cell.secTeamName.text = upcoming?[indexPath.row].event_away_team
+            let imgUrl = URL(string: self.upcoming?[indexPath.row].home_team_logo ?? "")
+            cell.firstTeamImage.kf.setImage(with: imgUrl, placeholder: UIImage(named: "barcelona"))
+            let imgUrl1 = URL(string: self.upcoming?[indexPath.row].away_team_logo ?? "")
+            cell.secTeamImage.kf.setImage(with: imgUrl1, placeholder: UIImage(named: "barcelona"))
+            cell.matchDate.text = upcoming?[indexPath.row].event_date
+            cell.matchTime.text = upcoming?[indexPath.row].event_time
+            
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: teamsCellReuseIdentifier, for: indexPath) as! LeaguesTeamsCellCollectionViewCell
@@ -160,6 +182,15 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LeaguesUpCommingEventsCollectionViewCell
             // Configure the custom cell for the bottom section
             // cell.customLabel.text = "Bottom Item \(indexPath.row + 1)"
+            cell.firstTeamName.text = latest?[indexPath.row].event_home_team
+            cell.secTeamName.text = latest?[indexPath.row].event_away_team
+            let imgUrl = URL(string: self.latest?[indexPath.row].home_team_logo ?? "")
+            cell.firstTeamImage.kf.setImage(with: imgUrl, placeholder: UIImage(named: "barcelona"))
+            let imgUrl1 = URL(string: self.latest?[indexPath.row].away_team_logo ?? "")
+            cell.secTeamImage.kf.setImage(with: imgUrl1, placeholder: UIImage(named: "barcelona"))
+            cell.matchDate.text = latest?[indexPath.row].event_date
+            cell.matchTime.text = latest?[indexPath.row].event_time
+            
             return cell
         default:
             fatalError("Unexpected section")

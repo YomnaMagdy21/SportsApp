@@ -18,7 +18,10 @@ class LeaguesDetailsViewModel{
     }
     
     var bindUpcomingEvent : (() -> ()) = {}
-    var upcomingResult : [UpcomingData]?
+    var upcomingResult : [EventsData]?
+    
+    var bindLatestEvent : (() -> ()) = {}
+    var latestResult : [EventsData]?
     
     func fetchTeams(leagueId: Int){
         networkService.fetchTeamsData(leagueId: leagueId) { response, error in
@@ -54,6 +57,18 @@ class LeaguesDetailsViewModel{
         }
     }
     
-    
+    func getLatestResult(sportName: String,leagueId: Int){
+        networkService.fetchLatestEvent(sportType: sportName, leagueId: leagueId){[weak self] (latest, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            self?.latestResult = latest?.result
+            print(self?.latestResult?.first?.event_final_result ?? "no result")
+        
+            self?.bindLatestEvent()
+            
+        }
+    }
     
 }
