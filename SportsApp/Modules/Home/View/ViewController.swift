@@ -22,7 +22,7 @@ class ViewController: UIViewController , UICollectionViewDelegate, UICollectionV
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.estimatedItemSize = .zero
             layout.itemSize = .zero
-           // layout.minimumLineSpacing = 0
+            layout.minimumLineSpacing = 20
             layout.minimumInteritemSpacing = 0
                }
         
