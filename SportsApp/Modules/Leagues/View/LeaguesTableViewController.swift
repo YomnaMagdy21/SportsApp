@@ -71,12 +71,15 @@ class LeaguesTableViewController: UITableViewController ,SFSafariViewControllerD
 //        cell.TitleLeague.text = "title"
         cell.TitleLeague.text = self.league?[indexPath.row].league_name
         let imgUrl = URL(string: self.league?[indexPath.row].league_logo ?? "")
-        cell.imgLeague.kf.setImage(with: imgUrl, placeholder: UIImage(named: "loading.jpeg"))
+        cell.imgLeague.kf.setImage(with: imgUrl, placeholder: UIImage(named: "barcelona"))
         
         return cell
     }
     
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+         return 100 // Adjust based on your design
+     }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

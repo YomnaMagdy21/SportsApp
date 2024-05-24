@@ -11,7 +11,7 @@ class ViewController: UIViewController , UICollectionViewDelegate, UICollectionV
     
     @IBOutlet weak var collectionView: UICollectionView!
     var names : [String] = ["football","basketball","cricket","tennis"]
-    var images : [String] = ["football1","basket","cricket","tennis1"]
+    var images : [String] = ["football1","basket","cricket2","tennis1"]
     var names2 : [String] = ["Football","Basketball","Cricket","Tennis"]
    
     override func viewDidLoad() {
