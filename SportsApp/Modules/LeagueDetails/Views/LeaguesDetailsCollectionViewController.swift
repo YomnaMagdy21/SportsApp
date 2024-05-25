@@ -16,11 +16,16 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
     var upcoming : [EventsData]?
     var latest : [EventsData]?
     var leagueId:Int?
+    var isHeartFilled = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backButtonTapped))
-               navigationItem.leftBarButtonItem = backButton
+        self.title = "League Details"
+        navigationItem.leftBarButtonItem = createCustomBackButton()
+        
+//               navigationItem.leftBarButtonItem = backButton
+        let heartButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(heartButtonTapped))
+              navigationItem.rightBarButtonItem = heartButton
         leagueDetailsViewModel = LeaguesDetailsViewModel()
         leagueDetailsViewModel?.bindTeamsLeague = { [weak self] in 
                             DispatchQueue.main.async {
@@ -66,6 +71,22 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
     @objc func backButtonTapped() {
            dismiss(animated: true, completion: nil)
        }
+    
+    @objc func heartButtonTapped() {
+         // Toggle the heart button state
+         isHeartFilled.toggle()
+         
+         // Update the button appearance based on the state
+         let heartImageName = isHeartFilled ? "heart.fill" : "heart"
+         navigationItem.rightBarButtonItem?.image = UIImage(systemName: heartImageName)
+         
+         // Handle additional actions for the button click
+         if isHeartFilled {
+             print("Heart is filled")
+         } else {
+             print("Heart is not filled")
+         }
+     }
     
     func createLayout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { (sectionIndex, environment) -> NSCollectionLayoutSection? in
@@ -270,6 +291,30 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
             navigationController?.pushViewController(teamDetailsVC, animated: true)
         }
     }
-    
+    func createCustomBackButton() -> UIBarButtonItem {
+        let backButton = UIButton(type: .system)
+        
+        // Set the image
+        let backImage = UIImage(systemName: "chevron.left")
+        backButton.setImage(backImage, for: .normal)
+        
+        // Set the title
+        backButton.setTitle(" Leagues", for: .normal)
+        
+        // Set the title color (if needed)
+        backButton.setTitleColor(UIColor(hex: "#006400", alpha: 0.8), for: .normal)
+        
+        // Combine the image and title
+        backButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        backButton.tintColor = UIColor(hex: "#006400", alpha: 0.8)
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        
+        // Create a UIBarButtonItem with the custom button
+        let customBarButtonItem = UIBarButtonItem(customView: backButton)
+        
+        return customBarButtonItem
+    }
+
+
 }
 
