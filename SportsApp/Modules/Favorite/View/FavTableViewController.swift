@@ -8,11 +8,14 @@
 import UIKit
 import Kingfisher
 import SafariServices
+import CoreData
 
 
 class FavTableViewController: UITableViewController ,SFSafariViewControllerDelegate{
 
- 
+    var  favViewModel : FavViewModel?
+        var fav : [NSManagedObject]?
+    //var league : [League]?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,10 +26,18 @@ class FavTableViewController: UITableViewController ,SFSafariViewControllerDeleg
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
 //        tableView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 50, right: 0)
 //           tableView.separatorInset = UIEdgeInsets(top: 0, left: 35, bottom: 0, right: 35)
+       
         tableView.separatorStyle = .none
 
         //tableView.backgroundColor = .clear  // Set table view background color
                 tableView.tableFooterView = UIView()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        favViewModel = FavViewModel()
+               favViewModel?.getFavData()
+               fav = favViewModel?.fav
+        tableView.reloadData()
+        
     }
 
     // MARK: - Table view data source
@@ -38,27 +49,87 @@ class FavTableViewController: UITableViewController ,SFSafariViewControllerDeleg
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 10
+        return fav?.count ?? 0
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "fav", for: indexPath) as! FavTableViewCell
         
-        let imageUrl = URL(string: "https://i.ebayimg.com/images/g/nMIAAOSwi15kY5HN/s-l1600.jpg")
-//             
-        cell.badge.kf.setImage(with: imageUrl, placeholder: UIImage(named: "barcelona"))
-        cell.name.text = "title"
-//
-//       
+        let favItem = fav?[indexPath.row]
+               if let leagueName = favItem?.value(forKey: "league_name") as? String {
+                      cell.name.text = leagueName
+                  } else {
+                      cell.name.text = "No name"
+                  }
+               if let leagueImg = favItem?.value(forKey: "league_logo") as? String {
+                   let imageUrl = URL(string: leagueImg)
+           
+                   cell.badge.kf.setImage(with: imageUrl, placeholder: UIImage(named: "barcelona"))
+                   
+                  }
 
         return cell
     }
    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100 // Adjust based on your design
+        return 100
     }
    
    
+
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+          if editingStyle == .delete {
+              let favDeletedItem = fav?[indexPath.row]
+              if let leagueKey = favDeletedItem?.value(forKey: "league_key") as? Int {
+                  favViewModel?.deleteFav(leagueId: leagueKey)
+                  
+                fav?.remove(at: indexPath.row)
+                  
+                 
+                  tableView.deleteRows(at: [indexPath], with: .fade)
+                
+                 } else {
+                     print("can't delete")
+                 }
+              
+          }
+       }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "SecStoryboard", bundle: nil)
+        if let leagueDetailsCollectionViewController = storyboard.instantiateViewController(withIdentifier: "LeagueDetailsScreen") as? LeaguesDetailsCollectionViewController {
+            
+            let navigationController = UINavigationController(rootViewController: leagueDetailsCollectionViewController)
+            
+            let favItem = fav?[indexPath.row]
+            if let leagueKey = favItem?.value(forKey: "league_key") as? Int {
+                leagueDetailsCollectionViewController.leagueId = leagueKey
+               } else {
+                   print("no key")
+               }
+                   if let leagueName = favItem?.value(forKey: "league_name") as? String {
+                       leagueDetailsCollectionViewController.leagueName = leagueName
+
+                      } else {
+                          print("no name")
+                      }
+                   if let leagueImg = favItem?.value(forKey: "league_logo") as? String {
+                     
+                       leagueDetailsCollectionViewController.leagueLogo = leagueImg
+                       
+                   }else {
+                       leagueDetailsCollectionViewController.leagueLogo = "barcelona"
+                   }
+           
+            
+            
+            
+            // Set the presentation style to full screen
+            navigationController.modalPresentationStyle = .fullScreen
+            
+            // Present the navigation controller
+            present(navigationController, animated: true, completion: nil)
+        }
+    }
 
   
     @IBAction func showVideo(_ sender: Any) {
