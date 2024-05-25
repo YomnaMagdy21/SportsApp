@@ -71,10 +71,31 @@ class LeaguesTableViewController: UITableViewController ,SFSafariViewControllerD
 //        cell.TitleLeague.text = "title"
         cell.TitleLeague.text = self.league?[indexPath.row].league_name
         let imgUrl = URL(string: self.league?[indexPath.row].league_logo ?? "")
-        cell.imgLeague.kf.setImage(with: imgUrl, placeholder: UIImage(named: "loading.jpeg"))
+        cell.imgLeague.kf.setImage(with: imgUrl, placeholder: UIImage(named: "barcelona"))
         
         return cell
     }
+    
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+         return 100 // Adjust based on your design
+     }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "SecStoryboard", bundle: nil)
+        if let leagueDetailsCollectionViewController = storyboard.instantiateViewController(withIdentifier: "LeagueDetailsScreen") as? LeaguesDetailsCollectionViewController {
+            
+            // Create a navigation controller with your view controller
+            let navigationController = UINavigationController(rootViewController: leagueDetailsCollectionViewController)
+            leagueDetailsCollectionViewController.leagueId = self.league?[indexPath.row].league_key
+            
+            // Set the presentation style to full screen
+            navigationController.modalPresentationStyle = .fullScreen
+            
+            // Present the navigation controller
+            present(navigationController, animated: true, completion: nil)
+        }
+    }
+
     
 
     /*

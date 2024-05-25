@@ -15,9 +15,12 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
     
     var upcoming : [EventsData]?
     var latest : [EventsData]?
+    var leagueId:Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backButtonTapped))
+               navigationItem.leftBarButtonItem = backButton
         leagueDetailsViewModel = LeaguesDetailsViewModel()
         leagueDetailsViewModel?.bindTeamsLeague = { [weak self] in 
                             DispatchQueue.main.async {
@@ -26,7 +29,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
                             }
             
         }
-        leagueDetailsViewModel?.fetchTeams(leagueId: 152)
+        leagueDetailsViewModel?.fetchTeams(leagueId: leagueId ?? 0)
 
         leagueDetailsViewModel?.bindUpcomingEvent = {[weak self] in
             DispatchQueue.main.async {
@@ -36,7 +39,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
             }
             
         }
-        leagueDetailsViewModel?.getUpcomingResult(sportName: "football", leagueId: 206 )
+        leagueDetailsViewModel?.getUpcomingResult(sportName: "football", leagueId: leagueId ?? 0 )
         
         leagueDetailsViewModel?.bindLatestEvent = {[weak self] in
             DispatchQueue.main.async {
@@ -46,7 +49,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
             }
             
         }
-        leagueDetailsViewModel?.getLatestResult(sportName: "football", leagueId: 206 )
+        leagueDetailsViewModel?.getLatestResult(sportName: "football", leagueId: leagueId ?? 0 )
         
         let upcomingEventsNib = UINib(nibName: "LeaguesUpCommingEventsCollectionViewCell", bundle: nil)
         self.collectionView!.register(upcomingEventsNib, forCellWithReuseIdentifier: reuseIdentifier)
@@ -60,6 +63,9 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
         
         collectionView.setCollectionViewLayout(createLayout(), animated: false)
     }
+    @objc func backButtonTapped() {
+           dismiss(animated: true, completion: nil)
+       }
     
     func createLayout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { (sectionIndex, environment) -> NSCollectionLayoutSection? in
