@@ -31,11 +31,11 @@ class NetworkServices : NetworkServicesProtocol{
         ]
         
         Alamofire.request(url, parameters: parameters).responseData { response in
-            print(response)
+//            print(response)
             switch response.result {
             case .success(let data):
                 do {
-                    print("Received data: \(String(data: data, encoding: .utf8) ?? "Empty data")")
+//                    print("Received data: \(String(data: data, encoding: .utf8) ?? "Empty data")")
                     let teamsResponseDecoded = try JSONDecoder().decode(LeagueTeamsResponse.self, from: data)
                     completion(teamsResponseDecoded, nil)
 //                    print(teamsResponseDecoded)
@@ -70,9 +70,9 @@ class NetworkServices : NetworkServicesProtocol{
             switch response.result {
             case .success(let data):
                 do {
-                    print("Received data in upcoming: \(String(data: data, encoding: .utf8) ?? "Empty data")")
+//                    print("Received data in upcoming: \(String(data: data, encoding: .utf8) ?? "Empty data")")
                     let upcoming = try JSONDecoder().decode(Events.self, from: data)
-                    print("after decode in upcoming\(upcoming)")
+//                    print("after decode in upcoming\(upcoming)")
                     compilitionHandler(upcoming, nil)
                 } catch {
                     compilitionHandler(nil, error)
@@ -89,9 +89,9 @@ class NetworkServices : NetworkServicesProtocol{
             switch response.result {
             case .success(let data):
                 do {
-                    print("Received data in latest: \(String(data: data, encoding: .utf8) ?? "Empty data")")
+//                    print("Received data in latest: \(String(data: data, encoding: .utf8) ?? "Empty data")")
                     let latest = try JSONDecoder().decode(Events.self, from: data)
-                    print("after decode in latest \(latest)")
+//                    print("after decode in latest \(latest)")
                     compilitionHandler(latest, nil)
                 } catch {
                     compilitionHandler(nil, error)
@@ -113,14 +113,14 @@ class NetworkServices : NetworkServicesProtocol{
         ]
         
         Alamofire.request(url, parameters: parameters).responseData { response in
-            print(response)
+//            print(response)
             switch response.result {
             case .success(let data):
                 do {
 //                    print("Received data: \(String(data: data, encoding: .utf8) ?? "Empty data")")
                     let teamsResponseDecoded = try JSONDecoder().decode(LeagueTeamsResponse.self, from: data)
                     completion(teamsResponseDecoded, nil)
-                    print(teamsResponseDecoded)
+//                    print(teamsResponseDecoded)
                 } catch {
                     completion(nil, error)
                 }

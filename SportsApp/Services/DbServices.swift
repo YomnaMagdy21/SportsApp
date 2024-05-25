@@ -11,7 +11,9 @@ import UIKit
 
 protocol DbServices {
     func fetchLeaguesData()
-    func checkLeaguesData() -> Bool 
+    func checkLeaguesData(leagueKey: Int) -> Bool
+    func addLeague(leagueName: String, leagueLogo: String, leagueKey: Int)
+    func deleteLeague(leagueKey: Int)
 
 }
 class DbServicesImpl : DbServices{
@@ -47,22 +49,51 @@ class DbServicesImpl : DbServices{
             print("Failed to fetch data: \(error.localizedDescription)")
         }
     }
-    func checkLeaguesData() -> Bool {
-       
-        let fetchRequest = NSFetchRequest<NSManagedObject>(
-            entityName: "FavLeagues")
-        let predicate = NSPredicate(format: "league_name == %@", league.league_name ?? "no name")
+    func checkLeaguesData(leagueKey: Int) -> Bool {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavLeagues")
+        let predicate = NSPredicate(format: "league_key == %@", String(leagueKey))
         fetchRequest.predicate = predicate
         
         do {
             let fav = try context.fetch(fetchRequest)
             return !fav.isEmpty
         } catch {
-            print("failed to get data: \(error.localizedDescription)")
+            print("Failed to get data: \(error.localizedDescription)")
             return false
         }
     }
 
-   
+
+    func addLeague(leagueName: String, leagueLogo: String, leagueKey: Int) {
+        let entity = NSEntityDescription.entity(forEntityName: "FavLeagues", in: context)!
+        let newLeague = NSManagedObject(entity: entity, insertInto: context)
+        
+        newLeague.setValue(leagueName, forKey: "league_name")
+        newLeague.setValue(leagueLogo, forKey: "league_logo")
+        newLeague.setValue(leagueKey, forKey: "league_key")
+        
+        do {
+            try context.save()
+            leagues.append(newLeague)
+        } catch {
+            print("Failed to save league: \(error.localizedDescription)")
+        }
+    }
+    
+    func deleteLeague(leagueKey: Int) {
+          let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavLeagues")
+          let predicate = NSPredicate(format: "league_key == %d", leagueKey)
+          fetchRequest.predicate = predicate
+
+          do {
+              let leaguesToDelete = try context.fetch(fetchRequest)
+              for league in leaguesToDelete {
+                  context.delete(league)
+              }
+              try context.save()
+          } catch {
+              print("Failed to delete league: \(error.localizedDescription)")
+          }
+      }
     
 }
