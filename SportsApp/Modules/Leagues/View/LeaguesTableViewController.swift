@@ -87,6 +87,8 @@ class LeaguesTableViewController: UITableViewController ,SFSafariViewControllerD
             // Create a navigation controller with your view controller
             let navigationController = UINavigationController(rootViewController: leagueDetailsCollectionViewController)
             leagueDetailsCollectionViewController.leagueId = self.league?[indexPath.row].league_key
+            leagueDetailsCollectionViewController.leagueName = self.league?[indexPath.row].league_name
+            leagueDetailsCollectionViewController.leagueLogo = self.league?[indexPath.row].league_logo
             
             // Set the presentation style to full screen
             navigationController.modalPresentationStyle = .fullScreen

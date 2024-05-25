@@ -16,21 +16,41 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
     var upcoming : [EventsData]?
     var latest : [EventsData]?
     var leagueId:Int?
+    var leagueName:String?
+    var leagueLogo:String?
     var isHeartFilled = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "League Details"
-        navigationItem.leftBarButtonItem = createCustomBackButton()
-        
-//               navigationItem.leftBarButtonItem = backButton
-        let heartButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(heartButtonTapped))
-              navigationItem.rightBarButtonItem = heartButton
         leagueDetailsViewModel = LeaguesDetailsViewModel()
-        leagueDetailsViewModel?.bindTeamsLeague = { [weak self] in 
+        navigationItem.leftBarButtonItem = createCustomBackButton()
+        print(leagueId ?? 0)
+//               navigationItem.leftBarButtonItem = backButton
+        // Create heart button with initial image
+        let heartButton = UIBarButtonItem(image: UIImage(systemName: isHeartFilled ? "heart.fill" : "heart"), style: .plain, target: self, action: #selector(heartButtonTapped))
+        navigationItem.rightBarButtonItem = heartButton
+
+        // Check if league key exists in the database
+        if let leagueId = leagueId, let leagueDetailsViewModel = leagueDetailsViewModel {
+            if leagueDetailsViewModel.leagueExists(leagueKey: leagueId) {
+                print("League exists in favorites")
+                isHeartFilled = true
+            } else {
+                print("League does not exist in favorites")
+                isHeartFilled = false
+            }
+            // Update heart button's image based on league existence
+            heartButton.image = UIImage(systemName: isHeartFilled ? "heart.fill" : "heart")
+        } else {
+            print("leagueId or leagueDetailsViewModel is nil")
+        }
+
+
+        leagueDetailsViewModel?.bindTeamsLeague = { [weak self] in
                             DispatchQueue.main.async {
                                 self?.collectionView.reloadData() 
-                                print(self?.leagueDetailsViewModel?.teams?.first?.team_name ?? "empty")
+//                                print(self?.leagueDetailsViewModel?.teams?.first?.team_name ?? "empty")
                             }
             
         }
@@ -40,7 +60,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
             DispatchQueue.main.async {
                 self?.upcoming = self?.leagueDetailsViewModel?.upcomingResult
                 self?.collectionView.reloadData()
-                print(self?.upcoming?.first?.country_name ?? "no contry name")
+//                print(self?.upcoming?.first?.country_name ?? "no contry name")
             }
             
         }
@@ -50,7 +70,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
             DispatchQueue.main.async {
                 self?.latest = self?.leagueDetailsViewModel?.latestResult
                 self?.collectionView.reloadData()
-                print(self?.latest?.first?.event_live ?? "no event live")
+//                print(self?.latest?.first?.event_live ?? "no event live")
             }
             
         }
@@ -73,21 +93,33 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
        }
     
     @objc func heartButtonTapped() {
-         // Toggle the heart button state
-         isHeartFilled.toggle()
-         
-         // Update the button appearance based on the state
-         let heartImageName = isHeartFilled ? "heart.fill" : "heart"
-         navigationItem.rightBarButtonItem?.image = UIImage(systemName: heartImageName)
-         
-         // Handle additional actions for the button click
-         if isHeartFilled {
-             print("Heart is filled")
-         } else {
-             print("Heart is not filled")
-         }
-     }
-    
+        print(leagueId ?? -1)
+        print(leagueName ?? "empty leagueName")
+        print(leagueLogo ?? "empty leagueLogo")
+        
+        // Toggle the heart button state
+        isHeartFilled.toggle()
+
+        // Update the button appearance based on the state
+        let heartImageName = isHeartFilled ? "heart.fill" : "heart"
+        navigationItem.rightBarButtonItem?.image = UIImage(systemName: heartImageName)
+
+        // Handle additional actions for the button click
+        if isHeartFilled {
+            // Add league to favorites
+            if let leagueId = leagueId, let leagueName = leagueName {
+                // Check if leagueLogo is empty
+                let logo = leagueLogo ?? ""
+                let leagueLogoToSave = logo.isEmpty ? "https://thumbs.dreamstime.com/b/all-sports-balls-stadium-d-imaginary-sport-modelled-rendered-78672313.jpg" : logo
+                leagueDetailsViewModel?.addLeague(leagueName: leagueName, leagueLogo: leagueLogoToSave, leagueKey: leagueId)
+            }
+        } else {
+            // Remove league from favorites
+            if let leagueId = leagueId {
+                leagueDetailsViewModel?.deleteLeague(leagueKey: leagueId)
+            }
+        }
+    }
     func createLayout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { (sectionIndex, environment) -> NSCollectionLayoutSection? in
             switch sectionIndex {
@@ -198,7 +230,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
                 if let imageUrlString = team.team_logo, let imageUrl = URL(string: imageUrlString) {
                     cell.configure(with: imageUrl)
                     cell.teamName.text = team.team_name
-                    print(team.team_name ?? "")
+//                    print(team.team_name ?? "")
                 } else {
                     // Handle missing or invalid image URL
                 }
