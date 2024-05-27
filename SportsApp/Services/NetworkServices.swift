@@ -7,7 +7,7 @@
 
 import Foundation
 import Alamofire
-import SwiftyJSON
+//import SwiftyJSON
 protocol NetworkServicesProtocol {
     func fetchTeamsData(leagueId: Int, completion: @escaping (LeagueTeamsResponse?, Error?) -> Void)
     func fetchTeamsDetails(teamId: Int, completion: @escaping (LeagueTeamsResponse?, Error?) -> Void)
