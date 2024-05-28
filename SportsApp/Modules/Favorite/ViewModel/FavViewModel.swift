@@ -12,11 +12,12 @@ class FavViewModel{
     var bindResultToFavTableViewController : (() -> ()) = {}
         var fav : [League]?
 
-    func getFavData() {
+    func getFavData() ->[League]{
            
-        self.fav = DbServicesImpl().fetchLeaguesData()
+     //   self.fav = DbServicesImpl().fetchLeaguesData()
         self.bindResultToFavTableViewController()
             
+        return DbServicesImpl().fetchLeaguesData()
     }
     
     func deleteFav(leagueId: Int){
