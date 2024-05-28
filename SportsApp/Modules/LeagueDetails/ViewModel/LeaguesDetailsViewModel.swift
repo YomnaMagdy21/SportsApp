@@ -8,8 +8,8 @@
 import Foundation
 
 class LeaguesDetailsViewModel{
-    let networkService = NetworkServices()
-    let dbService = DbServicesImpl()
+    var networkService : NetworkServicesProtocol = NetworkServices()
+    var dbService = DbServicesImpl()
     var bindTeamsLeague : (() -> ()) = {}
     var teams: [Result]?{
         didSet{

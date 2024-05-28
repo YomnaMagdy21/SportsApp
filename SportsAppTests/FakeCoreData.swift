@@ -7,27 +7,36 @@
 import Foundation
 @testable import SportsApp
 
-class FakeCoreData { // don't forgeet to confirm dbprotocol
-    private var leagues: [League] = []
+class DbServicesImplMock: DbServicesImpl {
+    var addLeagueCalled = false
+    var deleteLeagueCalled = false
+    var checkLeaguesDataCalled = false
+    var fetchLeaguesDataCalled = false
     
-    func setLeagues(leagues: [League]) {
-        self.leagues = leagues
+    var addedLeague: League?
+    var deletedLeagueKey: Int?
+    var leagueExistsResult: Bool = false
+    var leagus: [League] = []
+
+    override func addLeague(leagueName: String, leagueLogo: String, leagueKey: Int) {
+        addLeagueCalled = true
+        addedLeague = League(league_key: leagueKey, league_name: leagueName, league_logo: leagueLogo)
+        leagus.append(addedLeague!)
     }
     
-    func fetchLeaguesData() -> [League] {
-        return leagues
+    override func deleteLeague(leagueKey: Int) {
+        deleteLeagueCalled = true
+        deletedLeagueKey = leagueKey
+        leagus.removeAll { $0.league_key == leagueKey }
     }
     
-    func checkLeaguesData(leagueKey: Int) -> Bool {
-        return leagues.contains { $0.league_key == leagueKey }
+    override func checkLeaguesData(leagueKey: Int) -> Bool {
+        checkLeaguesDataCalled = true
+        return leagus.contains { $0.league_key == leagueKey }
     }
     
-    func addLeague(leagueName: String, leagueLogo: String, leagueKey: Int) {
-        let newLeague = League(league_key: leagueKey, league_name: leagueName, league_logo: leagueLogo)
-        leagues.append(newLeague)
-    }
-    
-    func deleteLeague(leagueKey: Int) {
-        leagues.removeAll { $0.league_key == leagueKey }
+    override func fetchLeaguesData() -> [League] {
+        fetchLeaguesDataCalled = true
+        return leagus
     }
 }
