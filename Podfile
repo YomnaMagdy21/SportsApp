@@ -8,6 +8,7 @@ target 'SportsApp' do
   # Pods for SportsApp
 pod 'Kingfisher', '~> 4.2'
 pod 'AlamofireSwiftyJSON'
+pod 'ReachabilitySwift'
 
   target 'SportsAppTests' do
     inherit! :search_paths
