@@ -9,7 +9,7 @@ import Foundation
 
 struct Events : Decodable{
     
-    var success: Int
+    var success: Int?
     var result: [EventsData]?
     
 }

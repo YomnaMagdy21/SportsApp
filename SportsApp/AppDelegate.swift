@@ -15,20 +15,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        // Set the global tint color to green
+       
           window?.tintColor = UIColor(hex: "#006400", alpha: 0.8)
 
           // Customize the navigation bar appearance
-          UINavigationBar.appearance().barTintColor = UIColor(hex: "#006400", alpha: 0.8)
+//          UINavigationBar.appearance().barTintColor = UIColor(hex: "#006400", alpha: 0.8)
           UINavigationBar.appearance().tintColor = UIColor(hex: "#006400", alpha: 0.8)
           UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(hex: "#006400", alpha: 0.8)]
 
-          // Customize the tab bar appearance
-          UITabBar.appearance().barTintColor = UIColor(hex: "#006400", alpha: 0.8)
+//          UITabBar.appearance().barTintColor = UIColor(hex: "#006400", alpha: 0.8)
           UITabBar.appearance().tintColor = UIColor(hex: "#006400", alpha: 0.8)
 
-          // Customize button appearance
           UIButton.appearance().tintColor = UIColor(hex: "#006400", alpha: 0.8)
 
         return true
