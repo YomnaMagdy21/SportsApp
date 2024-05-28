@@ -16,6 +16,7 @@ class SectionHeaderView: UICollectionReusableView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = UIColor(hex: "#006400", alpha: 0.8)
         
         return label
     }()
