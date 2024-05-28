@@ -19,10 +19,24 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
     var leagueName:String?
     var leagueLogo:String?
     var isHeartFilled = false
+    var activityIndicator: UIActivityIndicatorView!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "League Details"
+        // Initialize and configure the activity indicator
+              activityIndicator = UIActivityIndicatorView(style: .large)
+              activityIndicator.center = view.center
+              activityIndicator.hidesWhenStopped = true
+              view.addSubview(activityIndicator)
+              
+              // Show the activity indicator
+              activityIndicator.startAnimating()
+
+        collectionView.isHidden = true
+
+        
         leagueDetailsViewModel = LeaguesDetailsViewModel()
         navigationItem.leftBarButtonItem = createCustomBackButton()
         print(leagueId ?? 0)
@@ -50,6 +64,9 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
         leagueDetailsViewModel?.bindTeamsLeague = { [weak self] in
                             DispatchQueue.main.async {
                                 self?.collectionView.reloadData() 
+                                self?.activityIndicator.stopAnimating()
+                                self?.collectionView.isHidden = false
+
 //                                print(self?.leagueDetailsViewModel?.teams?.first?.team_name ?? "empty")
                             }
             
@@ -60,6 +77,9 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
             DispatchQueue.main.async {
                 self?.upcoming = self?.leagueDetailsViewModel?.upcomingResult
                 self?.collectionView.reloadData()
+                self?.activityIndicator.stopAnimating()
+                self?.collectionView.isHidden = false
+
 //                print(self?.upcoming?.first?.country_name ?? "no contry name")
             }
             
@@ -70,6 +90,9 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
             DispatchQueue.main.async {
                 self?.latest = self?.leagueDetailsViewModel?.latestResult
                 self?.collectionView.reloadData()
+                self?.activityIndicator.stopAnimating()
+                self?.collectionView.isHidden = false
+
 //                print(self?.latest?.first?.event_live ?? "no event live")
             }
             
@@ -194,11 +217,11 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return upcoming?.count ?? 1// Assuming one item for the top and bottom sections
+            return upcoming?.count ?? 5// Assuming one item for the top and bottom sections
         case 1:
-            return leagueDetailsViewModel?.teams?.count ?? 0 // Return count of teams array for the second section
+            return leagueDetailsViewModel?.teams?.count ?? 5 // Return count of teams array for the second section
         case 2:
-            return latest?.count ?? 1
+            return latest?.count ?? 5
         default:
             fatalError("Unexpected section")
         }
@@ -209,6 +232,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LeaguesUpCommingEventsCollectionViewCell
             // Configure the custom cell
             // cell.customLabel.text = "Item \(indexPath.row + 1)"
+            cell.result.text = "VS"
             cell.firstTeamName.text = upcoming?[indexPath.row].event_home_team
             cell.secTeamName.text = upcoming?[indexPath.row].event_away_team
             let imgUrl = URL(string: self.upcoming?[indexPath.row].home_team_logo ?? "")
@@ -249,6 +273,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
             cell.secTeamImage.kf.setImage(with: imgUrl1, placeholder: UIImage(named: "barcelona"))
             cell.matchDate.text = latest?[indexPath.row].event_date
             cell.matchTime.text = latest?[indexPath.row].event_time
+            cell.result.text = latest?[indexPath.row].event_final_result
             
             return cell
         default:
@@ -326,22 +351,15 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
     func createCustomBackButton() -> UIBarButtonItem {
         let backButton = UIButton(type: .system)
         
-        // Set the image
         let backImage = UIImage(systemName: "chevron.left")
         backButton.setImage(backImage, for: .normal)
-        
-        // Set the title
         backButton.setTitle(" Leagues", for: .normal)
         
-        // Set the title color (if needed)
         backButton.setTitleColor(UIColor(hex: "#006400", alpha: 0.8), for: .normal)
-        
-        // Combine the image and title
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         backButton.tintColor = UIColor(hex: "#006400", alpha: 0.8)
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         
-        // Create a UIBarButtonItem with the custom button
         let customBarButtonItem = UIBarButtonItem(customView: backButton)
         
         return customBarButtonItem

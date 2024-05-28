@@ -30,7 +30,7 @@ class LeaguesTeamsCellCollectionViewCell: UICollectionViewCell {
     }
     private func setupUI() {
          // Set border color and width
-//        self.layer.borderColor = UIColor(hex: "#006400", alpha: 0.8).cgColor
+        self.layer.borderColor = UIColor(hex: "#006400", alpha: 0.8).cgColor
          self.layer.borderWidth = 1.0
          
          // Set corner radius
