@@ -15,13 +15,26 @@ private let bottomSectionReuseIdentifier = "BottomSectionCell"
 class TeamDetailCollectionViewController: UICollectionViewController {
     var teamDetailsViewModel:TeamDetailsViewModel?
     var teamKey: Int?
+    var activityIndicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.center = view.center
+        activityIndicator.hidesWhenStopped = true
+        view.addSubview(activityIndicator)
+        
+        // Show the activity indicator
+        activityIndicator.startAnimating()
+
+//  collectionView.isHidden = true
+
         teamDetailsViewModel = TeamDetailsViewModel()
         teamDetailsViewModel?.bindTeamDetails = { [weak self] in
                             DispatchQueue.main.async {
                                 self?.collectionView.reloadData()
+                                self?.activityIndicator.stopAnimating()
+//                                self?.collectionView.isHidden = false
                                 //print(self?.leagueDetailsViewModel?.teams?.first?.team_name ?? "empty")
                               //  print(self?.teamDetailsViewModel?.teams?.first?.players?.first?.player_name ?? "empy name")
                                 print(self?.teamDetailsViewModel?.teams?.first?.players?.count ?? -1)
@@ -29,7 +42,6 @@ class TeamDetailCollectionViewController: UICollectionViewController {
             
         }
         teamDetailsViewModel?.fetchTeamDetails(teamId: teamKey ?? -1)
-        // Register custom cells
         let upcomingEventsNib = UINib(nibName: "TeamDetailsTopSectionCollectionViewCell", bundle: nil)
         self.collectionView!.register(upcomingEventsNib, forCellWithReuseIdentifier: reuseIdentifier)
         
@@ -39,7 +51,6 @@ class TeamDetailCollectionViewController: UICollectionViewController {
         let bottomSectionNib = UINib(nibName: "TeamDetailsBottomSectionCollectionViewCell", bundle: nil)
         self.collectionView!.register(bottomSectionNib, forCellWithReuseIdentifier: bottomSectionReuseIdentifier)
         
-        // Set up the collection view layout
         collectionView.setCollectionViewLayout(createLayout(), animated: false)
     }
     
