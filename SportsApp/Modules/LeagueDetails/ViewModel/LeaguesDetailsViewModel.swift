@@ -9,11 +9,12 @@ import Foundation
 
 class LeaguesDetailsViewModel{
     let networkService = NetworkServices()
+    let dbService = DbServicesImpl()
     var bindTeamsLeague : (() -> ()) = {}
     var teams: [Result]?{
         didSet{
             bindTeamsLeague()
-            print(teams?.first?.team_name ?? "empty")
+//            print(teams?.first?.team_name ?? "empty")
         }
     }
     
@@ -30,9 +31,9 @@ class LeaguesDetailsViewModel{
                 // Handle the error
             } else if let response = response {
                 self.teams = response.result
-                print(response.result?.count ?? -1)
-                print(self.teams?.count ?? -1)
-                print(self.teams?.first?.team_name ?? "empty")
+//                print(response.result?.count ?? -1)
+//                print(self.teams?.count ?? -1)
+//                print(self.teams?.first?.team_name ?? "empty")
                
 
 //                DispatchQueue.main.async {
@@ -50,7 +51,7 @@ class LeaguesDetailsViewModel{
                 return
             }
             self?.upcomingResult = upcoming?.result
-            print(self?.upcomingResult?.first?.event_final_result ?? "no result")
+//            print(self?.upcomingResult?.first?.event_final_result ?? "no result")
         
             self?.bindUpcomingEvent()
             
@@ -64,11 +65,21 @@ class LeaguesDetailsViewModel{
                 return
             }
             self?.latestResult = latest?.result
-            print(self?.latestResult?.first?.event_final_result ?? "no result")
+//            print(self?.latestResult?.first?.event_final_result ?? "no result")
         
             self?.bindLatestEvent()
             
         }
     }
     
-}
+    // db functions
+    func addLeague(leagueName: String, leagueLogo: String, leagueKey: Int) {
+          dbService.addLeague(leagueName: leagueName, leagueLogo: leagueLogo, leagueKey: leagueKey)
+      }
+      
+    func deleteLeague(leagueKey: Int) {
+           dbService.deleteLeague(leagueKey: leagueKey)
+       }
+    func leagueExists(leagueKey: Int) -> Bool {
+          return dbService.checkLeaguesData(leagueKey: leagueKey)
+      }}
