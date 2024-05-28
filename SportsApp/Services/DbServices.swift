@@ -30,6 +30,7 @@ class DbServicesImpl : DbServices{
         context = self.appDelegate.persistentContainer.viewContext
         league = League()
     }
+    
     func fetchLeaguesData() -> [League] {
           leaguesArray = []
           let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavLeagues")

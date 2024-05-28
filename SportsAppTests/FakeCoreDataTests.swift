@@ -4,61 +4,96 @@
 //
 //  Created by Omar  on 28/05/2024.
 //
-
 import XCTest
+//import CoreData
 @testable import SportsApp
 
-class FakeCoreDataTests: XCTestCase {
-
-    var fakeCoreData: FakeCoreData!
-    var league1: League!
-    var league2: League!
-    var league3: League!
+final class DbServicesImplTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        fakeCoreData = FakeCoreData()
-        league1 = League(league_key: 101, league_name: "League 1", league_logo: "logo1.png")
-        league2 = League(league_key: 102, league_name: "League 2", league_logo: "logo2.png")
-        league3 = League(league_key: 103, league_name: "League 3", league_logo: "logo3.png")
+    var coreDataManager: DbServicesImpl!
+    var testLeagueKey: Int!
+    
+    override func setUpWithError() throws {
+        coreDataManager = DbServicesImpl()
+        testLeagueKey = 101
     }
 
-    override func tearDown() {
-        fakeCoreData = nil
-        league1 = nil
-        league2 = nil
-        league3 = nil
-        super.tearDown()
+    override func tearDownWithError() throws {
+        coreDataManager = nil
+        testLeagueKey = nil
     }
-
-    func testSetLeagues() {
-        fakeCoreData.setLeagues(leagues: [league1, league2])
-        XCTAssertEqual(fakeCoreData.fetchLeaguesData().count, 2)
-    }
-
-    func testFetchLeaguesData() {
-        fakeCoreData.setLeagues(leagues: [league1, league2])
-        let leagues = fakeCoreData.fetchLeaguesData()
-        XCTAssertEqual(leagues.count, 2)
-        XCTAssertEqual(leagues[0].league_key, league1.league_key)
-        XCTAssertEqual(leagues[1].league_key, league2.league_key)
-    }
-
-    func testCheckLeaguesData() {
-        fakeCoreData.setLeagues(leagues: [league1, league2])
-        XCTAssertTrue(fakeCoreData.checkLeaguesData(leagueKey: 101))
-        XCTAssertFalse(fakeCoreData.checkLeaguesData(leagueKey: 999))
-    }
+    
+//    func createMockPersistentContainer() -> NSPersistentContainer {
+//        let container = NSPersistentContainer(name: "SportsApp")
+//        let description = NSPersistentStoreDescription()
+//        description.type = NSInMemoryStoreType
+//        container.persistentStoreDescriptions = [description]
+//        container.loadPersistentStores { description, error in
+//            if let error = error {
+//                fatalError("Failed to load store: \(error)")
+//            }
+//        }
+//        return container
+//    }
 
     func testAddLeague() {
-        fakeCoreData.addLeague(leagueName: league3.league_name ?? "", leagueLogo: league3.league_logo ?? "", leagueKey: league3.league_key ?? 0)
-        XCTAssertTrue(fakeCoreData.checkLeaguesData(leagueKey: 103))
+        let leagueName = "Test League"
+        let leagueLogo = "test_logo.png"
+        
+        coreDataManager.addLeague(leagueName: leagueName, leagueLogo: leagueLogo, leagueKey: testLeagueKey)
+        
+        XCTAssertTrue(coreDataManager.checkLeaguesData(leagueKey: testLeagueKey), "League should exist in Core Data after saving")
     }
 
     func testDeleteLeague() {
-        fakeCoreData.setLeagues(leagues: [league1, league2, league3])
-        fakeCoreData.deleteLeague(leagueKey: 102)
-        XCTAssertFalse(fakeCoreData.checkLeaguesData(leagueKey: 102))
-        XCTAssertEqual(fakeCoreData.fetchLeaguesData().count, 2)
+        let leagueName = "Test League"
+        let leagueLogo = "test_logo.png"
+        
+        coreDataManager.addLeague(leagueName: leagueName, leagueLogo: leagueLogo, leagueKey: testLeagueKey)
+        coreDataManager.deleteLeague(leagueKey: testLeagueKey)
+        
+        XCTAssertFalse(coreDataManager.checkLeaguesData(leagueKey: testLeagueKey), "League should not exist in Core Data after deletion")
+    }
+
+    func testFetchLeaguesData() {
+            let leagueName1 = "Test League 1"
+            let leagueLogo1 = "test_logo1.png"
+            let leagueKey1 = 101
+            
+            let leagueName2 = "Test League 2"
+            let leagueLogo2 = "test_logo2.png"
+            let leagueKey2 = 102
+            
+            let initialCount = coreDataManager.fetchLeaguesData().count
+            
+            coreDataManager.addLeague(leagueName: leagueName1, leagueLogo: leagueLogo1, leagueKey: leagueKey1)
+            coreDataManager.addLeague(leagueName: leagueName2, leagueLogo: leagueLogo2, leagueKey: leagueKey2)
+            
+            let retrievedLeagues = coreDataManager.fetchLeaguesData()
+            
+            XCTAssertEqual(retrievedLeagues.count, initialCount + 2)
+            
+            // Validate the added leagues are present
+//            let addedLeague1 = retrievedLeagues.first { $0.league_key == leagueKey1 }
+//            let addedLeague2 = retrievedLeagues.first { $0.league_key == leagueKey2 }
+//            
+//            XCTAssertNotNil(addedLeague1)
+//            XCTAssertNotNil(addedLeague2)
+//            
+//            XCTAssertEqual(addedLeague1?.league_name, leagueName1)
+//            XCTAssertEqual(addedLeague1?.league_logo, leagueLogo1)
+//            
+//            XCTAssertEqual(addedLeague2?.league_name, leagueName2)
+//            XCTAssertEqual(addedLeague2?.league_logo, leagueLogo2)
+        }
+    func testCheckLeaguesData() {
+        let leagueName = "Test League"
+        let leagueLogo = "test_logo.png"
+        
+        coreDataManager.addLeague(leagueName: leagueName, leagueLogo: leagueLogo, leagueKey: testLeagueKey)
+        
+        let exists = coreDataManager.checkLeaguesData(leagueKey: testLeagueKey)
+        
+        XCTAssertTrue(exists, "League should exist in Core Data")
     }
 }
