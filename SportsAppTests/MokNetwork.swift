@@ -21,40 +21,58 @@ final class MokNetwork: XCTestCase {
         mockObj = nil
     }
     func testMockFetchTeamsData(){
-        mockObj?.fetchTeamsData(leagueId: 206) { result in
-                    XCTAssertNotNil(result)
-                    if let result = result {
-                        print(result)
-                    } else {
-                        XCTFail()
-                        print("fail")
-                    }
+        mockObj?.fetchTeamsData(leagueId: 206) { result , error in
+            if let error = error {
+                XCTFail()
+            }else{
+                
+                XCTAssertNotNil(result)
+            }
                 }
     }
     func testMockFetchLeaguesData(){
          
-        mockObj?.fetchLeaguesData(sportType: "football") { result in
-                    XCTAssertNotNil(result)
-                    if let result = result {
-                        print(result)
-                    } else {
-                        XCTFail()
-                        print("fail")
-                    }
+        mockObj?.fetchLeaguesData(sportType: "football") { result , error in
+            if let error = error {
+                XCTFail()
+            }else{
+               
+                XCTAssertNotNil(result)
+            }
                 }
         }
     func testMockFetchUpcomingData(){
          
-        mockObj?.fetchUpcomingData(sportType: "football", leagueId: 206) { result in
-                    XCTAssertNotNil(result)
-                    if let result = result {
-                        print(result)
-                    } else {
-                        XCTFail()
-                        print("fail")
-                    }
+        mockObj?.fetchUpcomingData(sportType: "football", leagueId: 206) { result , error in
+            if let error = error {
+                XCTFail()
+            }else{
+                
+                XCTAssertNotNil(result)
+            }
+                }
+        }
+    func testMockFetchLatestData(){
+         
+        mockObj?.fetchLatestEvent(sportType: "football", leagueId: 206) { result , error in
+            if let error = error {
+                XCTFail()
+            }else{
+                
+                XCTAssertNotNil(result)
+            }
                 }
         }
 
+    func testMockFetchTeamsDetailsData(){
+        mockObj?.fetchTeamsDetails(teamId: 4977){ result , error in
+            if let error = error {
+                XCTFail()
+            }else{
+                
+                XCTAssertNotNil(result)
+            }
+                }
+    }
 
 }

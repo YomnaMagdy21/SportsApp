@@ -29,53 +29,72 @@ class MockNetworkService{
     
 }
 
-extension MockNetworkService { //: NetworkServicesProtocol{
-    
-    func fetchTeamsData(leagueId: Int, completion: @escaping (LeagueTeamsResponse?) -> Void){
+extension MockNetworkService : NetworkServicesProtocol{
+    func fetchTeamsData(leagueId: Int, completion: @escaping (SportsApp.LeagueTeamsResponse?, Error?) -> Void) {
         do{
-            let data = Data(fakeLeagueData.utf8)
+            let data = Data(fakeLeagueTeamsResponse.utf8)
             
           
             leagueTeamsResponse = try JSONDecoder().decode(LeagueTeamsResponse.self, from: data)
-            completion(leagueTeamsResponse)
+            completion(leagueTeamsResponse, nil)
         }catch{
             print(error.localizedDescription)
-            completion(nil)
+            completion(nil,error)
         }
     }
-  
-    func fetchLeaguesData(sportType: String, compilitionHandler : @escaping (Leagues?) -> Void){
-        
+    
+    func fetchTeamsDetails(teamId: Int, completion: @escaping (SportsApp.LeagueTeamsResponse?, Error?) -> Void) {
+        do{
+            let data = Data(fakeLeagueTeamsResponse.utf8)
+            
+          
+            leagueTeamsResponse = try JSONDecoder().decode(LeagueTeamsResponse.self, from: data)
+            completion(leagueTeamsResponse,nil)
+        }catch{
+            print(error.localizedDescription)
+            completion(nil,error)
+        }
+    }
+    
+    func fetchLeaguesData(sportType: String, compilitionHandler: @escaping (SportsApp.Leagues?, Error?) -> Void) {
         do{
             let data = Data(fakeLeagueData.utf8)
             
           //  let data = try JSONSerialization.data(withJSONObject: fakeLeagueData)
             leagues = try JSONDecoder().decode(Leagues.self, from: data)
-            compilitionHandler(leagues)
+            compilitionHandler(leagues,nil)
         }catch{
             print(error.localizedDescription)
-            compilitionHandler(nil)
+            compilitionHandler(nil,error)
         }
-       
     }
-    func fetchUpcomingData(sportType: String, leagueId : Int, compilitionHandler: @escaping (Events?) -> Void) {
+    
+    func fetchUpcomingData(sportType: String, leagueId: Int, compilitionHandler: @escaping (SportsApp.Events?, Error?) -> Void) {
         do{
-            let data = Data(fakeLeagueData.utf8)
+            let data = Data(fakeUpcomingData.utf8)
             //var data = try JSONSerialization.data(withJSONObject: fakeLeagueData)
             upcoming = try JSONDecoder().decode(Events.self, from: data)
-            compilitionHandler(upcoming)
+            compilitionHandler(upcoming,nil)
         }catch{
             print(error.localizedDescription)
-            compilitionHandler(nil)
+            compilitionHandler(nil,error)
             
         }
-//        if shouldReturnError{
-//            compilitionHandler(nil,responseWithError.responseError)
-//        }else{
-//            compilitionHandler(upcoming,nil)
-//        }
-        
     }
     
+    func fetchLatestEvent(sportType: String, leagueId: Int, compilitionHandler: @escaping (SportsApp.Events?, Error?) -> Void) {
+        do{
+            let data = Data(fakeUpcomingData.utf8)
+            //var data = try JSONSerialization.data(withJSONObject: fakeLeagueData)
+            upcoming = try JSONDecoder().decode(Events.self, from: data)
+            compilitionHandler(upcoming,nil)
+        }catch{
+            print(error.localizedDescription)
+            compilitionHandler(nil,error)
+            
+        }
+    }
     
+
+   
 }

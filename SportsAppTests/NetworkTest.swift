@@ -25,6 +25,7 @@ final class NetworkTest: XCTestCase {
         NetworkServices().fetchTeamsData(leagueId: 206){result,error in
             if let error = error {
                 XCTFail()
+                print(error)
             }else{
                 XCTAssertEqual(result?.success,1)
                 
@@ -35,11 +36,27 @@ final class NetworkTest: XCTestCase {
         waitForExpectations(timeout: 5)
     }
 
+    func testGetTeamesDetailsData(){
+        let expectaion = expectation(description: "wait for api")
+        NetworkServices().fetchTeamsDetails(teamId: 4977){result,error in
+            if let error = error {
+                XCTFail()
+                print(error)
+            }else{
+                XCTAssertEqual(result?.success,1)
+                
+                expectaion.fulfill()
+            }
+            
+        }
+        waitForExpectations(timeout: 5)
+    }
     func testGetLeagueData(){
            let expectaion = expectation(description: "wait for api")
         NetworkServices().fetchLeaguesData(sportType:"football"){result,error in
                if let error = error {
                    XCTFail()
+                   print(error)
                }else{
                    XCTAssertEqual(result?.success,1)
                    
@@ -55,6 +72,7 @@ final class NetworkTest: XCTestCase {
            NetworkServices().fetchUpcomingData(sportType:"football", leagueId: 206){result,error in
                if let error = error {
                    XCTFail()
+                   print(error)
                }else{
                    XCTAssertEqual(result?.success,1)
                    
@@ -66,5 +84,21 @@ final class NetworkTest: XCTestCase {
          
        }
 
+    func testGetLatestEvent(){
+        let expectaion = expectation(description: "wait for api")
+        NetworkServices().fetchLatestEvent(sportType:"football", leagueId: 206){result,error in
+            if let error = error {
+                XCTFail()
+                print(error)
+            }else{
+                XCTAssertEqual(result?.success,1)
+                
+                expectaion.fulfill()
+            }
+            
+        }
+        waitForExpectations(timeout: 5)
+      
+    }
 
 }
