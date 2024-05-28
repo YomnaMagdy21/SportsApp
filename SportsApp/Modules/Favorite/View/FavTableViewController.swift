@@ -14,28 +14,20 @@ import CoreData
 class FavTableViewController: UITableViewController ,SFSafariViewControllerDelegate{
 
     var  favViewModel : FavViewModel?
-        var fav : [NSManagedObject]?
-    //var league : [League]?
+      //  var fav : [NSManagedObject]?
+    var league : [League]?
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-//        tableView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 50, right: 0)
-//           tableView.separatorInset = UIEdgeInsets(top: 0, left: 35, bottom: 0, right: 35)
+      
        
         tableView.separatorStyle = .none
-
-        //tableView.backgroundColor = .clear  // Set table view background color
-                tableView.tableFooterView = UIView()
+          tableView.tableFooterView = UIView()
     }
     override func viewWillAppear(_ animated: Bool) {
         favViewModel = FavViewModel()
-               favViewModel?.getFavData()
-               fav = favViewModel?.fav
+        league = favViewModel?.getFavData()
+       
         tableView.reloadData()
         
     }
@@ -49,25 +41,29 @@ class FavTableViewController: UITableViewController ,SFSafariViewControllerDeleg
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return fav?.count ?? 0
+        return league?.count ?? 0
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "fav", for: indexPath) as! FavTableViewCell
         
-        let favItem = fav?[indexPath.row]
-               if let leagueName = favItem?.value(forKey: "league_name") as? String {
-                      cell.name.text = leagueName
-                  } else {
-                      cell.name.text = "No name"
-                  }
-               if let leagueImg = favItem?.value(forKey: "league_logo") as? String {
-                   let imageUrl = URL(string: leagueImg)
-           
-                   cell.badge.kf.setImage(with: imageUrl, placeholder: UIImage(named: "barcelona"))
-                   
-                  }
+        if let favItem = league?[indexPath.row] {
+            cell.name.text = favItem.league_name ?? "No name"
+            
+            if let leagueImg = favItem.league_logo {
+                if let imageUrl = URL(string: leagueImg) {
+                    cell.badge.kf.setImage(with: imageUrl, placeholder: UIImage(named: "barcelona"))
+                } else {
+                    cell.badge.image = UIImage(named: "barcelona")
+                }
+            } else {
+                cell.badge.image = UIImage(named: "barcelona")
+            }
+        } else {
+            cell.name.text = "No name"
+            cell.badge.image = UIImage(named: "barcelona")
+        }
 
         return cell
     }
@@ -78,58 +74,40 @@ class FavTableViewController: UITableViewController ,SFSafariViewControllerDeleg
    
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-          if editingStyle == .delete {
-              let favDeletedItem = fav?[indexPath.row]
-              if let leagueKey = favDeletedItem?.value(forKey: "league_key") as? Int {
-                  favViewModel?.deleteFav(leagueId: leagueKey)
-                  
-                fav?.remove(at: indexPath.row)
-                  
-                 
-                  tableView.deleteRows(at: [indexPath], with: .fade)
-                
-                 } else {
-                     print("can't delete")
-                 }
-              
-          }
-       }
+        if editingStyle == .delete {
+            let favDeletedItem = league?[indexPath.row]
+            if let leagueKey = favDeletedItem?.league_key {
+                favViewModel?.deleteFav(leagueId: leagueKey)
+                league?.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            } else {
+                print("Can't delete: no league key")
+            }
+        }
+    }
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "SecStoryboard", bundle: nil)
         if let leagueDetailsCollectionViewController = storyboard.instantiateViewController(withIdentifier: "LeagueDetailsScreen") as? LeaguesDetailsCollectionViewController {
-            
+
             let navigationController = UINavigationController(rootViewController: leagueDetailsCollectionViewController)
             
-            let favItem = fav?[indexPath.row]
-            if let leagueKey = favItem?.value(forKey: "league_key") as? Int {
-                leagueDetailsCollectionViewController.leagueId = leagueKey
-               } else {
-                   print("no key")
-               }
-                   if let leagueName = favItem?.value(forKey: "league_name") as? String {
-                       leagueDetailsCollectionViewController.leagueName = leagueName
+            if let favItem = league?[indexPath.row] {
+                leagueDetailsCollectionViewController.leagueId = favItem.league_key
+                leagueDetailsCollectionViewController.leagueName = favItem.league_name
+                leagueDetailsCollectionViewController.leagueLogo = favItem.league_logo ?? "barcelona"
 
-                      } else {
-                          print("no name")
-                      }
-                   if let leagueImg = favItem?.value(forKey: "league_logo") as? String {
-                     
-                       leagueDetailsCollectionViewController.leagueLogo = leagueImg
-                       
-                   }else {
-                       leagueDetailsCollectionViewController.leagueLogo = "barcelona"
-                   }
-           
-            
-            
-            
-            // Set the presentation style to full screen
-            navigationController.modalPresentationStyle = .fullScreen
-            
-            // Present the navigation controller
-            present(navigationController, animated: true, completion: nil)
+                
+                navigationController.modalPresentationStyle = .fullScreen
+
+               
+                present(navigationController, animated: true, completion: nil)
+            } else {
+                print("No league item found at index \(indexPath.row)")
+            }
         }
     }
+
 
   
     @IBAction func showVideo(_ sender: Any) {

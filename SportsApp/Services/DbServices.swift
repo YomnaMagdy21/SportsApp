@@ -10,7 +10,7 @@ import CoreData
 import UIKit
 
 protocol DbServices {
-    func fetchLeaguesData() -> [NSManagedObject]
+    func fetchLeaguesData() -> [League]
     func checkLeaguesData(leagueKey: Int) -> Bool
     func addLeague(leagueName: String, leagueLogo: String, leagueKey: Int)
     func deleteLeague(leagueKey: Int)
@@ -21,6 +21,7 @@ class DbServicesImpl : DbServices{
     let appDelegate : AppDelegate
     let context : NSManagedObjectContext
     var leagues : [NSManagedObject] = []
+    var leaguesArray : [League] = []
     let league : League
    
     
@@ -29,28 +30,28 @@ class DbServicesImpl : DbServices{
         context = self.appDelegate.persistentContainer.viewContext
         league = League()
     }
-    
-    func fetchLeaguesData() -> [NSManagedObject]{
-        leagues = []
-        let fetchRequest = NSFetchRequest<NSManagedObject>(
-            entityName: "FavLeagues")
-        
-        do{
-            self.leagues = try context.fetch(fetchRequest)
-            var league = League()
-            for fav in leagues{
-               
-                fav.value(forKey: "league_name")
-                fav.value(forKey: "league_logo")
-                fav.value(forKey: "league_key")
-              
-            }
-            
-        }catch{
-            print("Failed to fetch data: \(error.localizedDescription)")
-        }
-        return leagues
-    }
+    func fetchLeaguesData() -> [League] {
+          leaguesArray = []
+          let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavLeagues")
+
+          do {
+              self.leagues = try context.fetch(fetchRequest)
+              for fav in leagues {
+                  if let leagueName = fav.value(forKey: "league_name") as? String,
+                     let leagueLogo = fav.value(forKey: "league_logo") as? String,
+                     let leagueKey = fav.value(forKey: "league_key") as? Int {
+                      
+                      let league = League(league_key: leagueKey, league_name: leagueName, league_logo: leagueLogo)
+                      leaguesArray.append(league)
+                  }
+              }
+
+          } catch {
+              print("Failed to fetch data: \(error.localizedDescription)")
+          }
+          return leaguesArray
+      }
+
     func checkLeaguesData(leagueKey: Int) -> Bool {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavLeagues")
         let predicate = NSPredicate(format: "league_key == %@", String(leagueKey))
