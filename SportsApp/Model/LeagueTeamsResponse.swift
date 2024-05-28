@@ -2,7 +2,7 @@ import Foundation
 
 // MARK: - Welcome1
 struct LeagueTeamsResponse: Codable {
-    let success: Int
+    let success: Int?
     let result: [Result]?
 }
 

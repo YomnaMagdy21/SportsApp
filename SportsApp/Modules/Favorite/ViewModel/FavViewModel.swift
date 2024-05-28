@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 class FavViewModel{
     var bindResultToFavTableViewController : (() -> ()) = {}
-        var fav : [NSManagedObject]?
+        var fav : [League]?
 
     func getFavData() {
            

@@ -15,7 +15,7 @@ class FavTableViewController: UITableViewController ,SFSafariViewControllerDeleg
 
     var  favViewModel : FavViewModel?
         var fav : [NSManagedObject]?
-    //var league : [League]?
+    var league : [League]?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,7 +35,7 @@ class FavTableViewController: UITableViewController ,SFSafariViewControllerDeleg
     override func viewWillAppear(_ animated: Bool) {
         favViewModel = FavViewModel()
                favViewModel?.getFavData()
-               fav = favViewModel?.fav
+               league = favViewModel?.fav
         tableView.reloadData()
         
     }

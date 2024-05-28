@@ -10,7 +10,7 @@ import CoreData
 import UIKit
 
 protocol DbServices {
-    func fetchLeaguesData() -> [NSManagedObject]
+    func fetchLeaguesData() -> [League]
     func checkLeaguesData(leagueKey: Int) -> Bool
     func addLeague(leagueName: String, leagueLogo: String, leagueKey: Int)
     func deleteLeague(leagueKey: Int)
@@ -21,6 +21,7 @@ class DbServicesImpl : DbServices{
     let appDelegate : AppDelegate
     let context : NSManagedObjectContext
     var leagues : [NSManagedObject] = []
+    var leaguesArray : [League] = []
     let league : League
    
     
@@ -30,7 +31,7 @@ class DbServicesImpl : DbServices{
         league = League()
     }
     
-    func fetchLeaguesData() -> [NSManagedObject]{
+    func fetchLeaguesData() -> [League]{
         leagues = []
         let fetchRequest = NSFetchRequest<NSManagedObject>(
             entityName: "FavLeagues")
@@ -49,7 +50,7 @@ class DbServicesImpl : DbServices{
         }catch{
             print("Failed to fetch data: \(error.localizedDescription)")
         }
-        return leagues
+        return leaguesArray
     }
     func checkLeaguesData(leagueKey: Int) -> Bool {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavLeagues")
