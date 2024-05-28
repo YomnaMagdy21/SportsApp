@@ -8,7 +8,7 @@
 import Foundation
 
 struct Leagues: Decodable {
-    var success: Int
+    var success: Int?
     var result: [League]?
 }
 
