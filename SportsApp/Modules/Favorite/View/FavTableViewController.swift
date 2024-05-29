@@ -9,10 +9,11 @@ import UIKit
 import Kingfisher
 import SafariServices
 import CoreData
-
+import Reachability
 
 class FavTableViewController: UITableViewController ,SFSafariViewControllerDelegate{
 
+    let reachability = try! Reachability()
     var  favViewModel : FavViewModel?
       //  var fav : [NSManagedObject]?
     var league : [League]?
@@ -23,6 +24,13 @@ class FavTableViewController: UITableViewController ,SFSafariViewControllerDeleg
        
         tableView.separatorStyle = .none
           tableView.tableFooterView = UIView()
+        self.tabBarItem.title = "Favorite"
+
+        do {
+                    try reachability.startNotifier()
+                } catch {
+                    print("Unable to start notifier")
+                }
     }
     override func viewWillAppear(_ animated: Bool) {
         favViewModel = FavViewModel()
@@ -87,23 +95,36 @@ class FavTableViewController: UITableViewController ,SFSafariViewControllerDeleg
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if reachability.connection != .unavailable {
         let storyboard = UIStoryboard(name: "SecStoryboard", bundle: nil)
-        if let leagueDetailsCollectionViewController = storyboard.instantiateViewController(withIdentifier: "LeagueDetailsScreen") as? LeaguesDetailsCollectionViewController {
-
-            let navigationController = UINavigationController(rootViewController: leagueDetailsCollectionViewController)
-            
-            if let favItem = league?[indexPath.row] {
-                leagueDetailsCollectionViewController.leagueId = favItem.league_key
-                leagueDetailsCollectionViewController.leagueName = favItem.league_name
-                leagueDetailsCollectionViewController.leagueLogo = favItem.league_logo ?? "barcelona"
-
+            if let leagueDetailsCollectionViewController = storyboard.instantiateViewController(withIdentifier: "LeagueDetailsScreen") as? LeaguesDetailsCollectionViewController {
                 
-                navigationController.modalPresentationStyle = .fullScreen
-
-               
-                present(navigationController, animated: true, completion: nil)
-            } else {
-                print("No league item found at index \(indexPath.row)")
+                let navigationController = UINavigationController(rootViewController: leagueDetailsCollectionViewController)
+                
+                if let favItem = league?[indexPath.row] {
+                    leagueDetailsCollectionViewController.leagueId = favItem.league_key
+                    leagueDetailsCollectionViewController.leagueName = favItem.league_name
+                    leagueDetailsCollectionViewController.leagueLogo = favItem.league_logo ?? "barcelona"
+                    
+                    
+                    navigationController.modalPresentationStyle = .fullScreen
+                    
+                    
+                    present(navigationController, animated: true, completion: nil)
+                } else {
+                    print("No league item found at index \(indexPath.row)")
+                }
+            }else{
+                let alertController = UIAlertController(title: "Network Error!", message: "The device isn't connected to network, recheck the internet correctivily", preferredStyle: .alert)
+                        
+                      
+                        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                        
+                     
+                        alertController.addAction(okAction)
+                        
+                        
+                        present(alertController, animated: true, completion: nil)
             }
         }
     }
