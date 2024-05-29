@@ -232,16 +232,19 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LeaguesUpCommingEventsCollectionViewCell
             // Configure the custom cell
             // cell.customLabel.text = "Item \(indexPath.row + 1)"
-            cell.result.text = "VS"
-            cell.firstTeamName.text = upcoming?[indexPath.row].event_home_team
-            cell.secTeamName.text = upcoming?[indexPath.row].event_away_team
-            let imgUrl = URL(string: self.upcoming?[indexPath.row].home_team_logo ?? "")
-            cell.firstTeamImage.kf.setImage(with: imgUrl, placeholder: UIImage(named: "barcelona"))
-            let imgUrl1 = URL(string: self.upcoming?[indexPath.row].away_team_logo ?? "")
-            cell.secTeamImage.kf.setImage(with: imgUrl1, placeholder: UIImage(named: "barcelona"))
-            cell.matchDate.text = upcoming?[indexPath.row].event_date
-            cell.matchTime.text = upcoming?[indexPath.row].event_time
-            
+            if upcoming?.count == 0{
+                cell.imgView.image = UIImage(named: "nodata")
+            }else{
+                cell.result.text = "VS"
+                cell.firstTeamName.text = upcoming?[indexPath.row].event_home_team
+                cell.secTeamName.text = upcoming?[indexPath.row].event_away_team
+                let imgUrl = URL(string: self.upcoming?[indexPath.row].home_team_logo ?? "")
+                cell.firstTeamImage.kf.setImage(with: imgUrl, placeholder: UIImage(named: "barcelona"))
+                let imgUrl1 = URL(string: self.upcoming?[indexPath.row].away_team_logo ?? "")
+                cell.secTeamImage.kf.setImage(with: imgUrl1, placeholder: UIImage(named: "barcelona"))
+                cell.matchDate.text = upcoming?[indexPath.row].event_date
+                cell.matchTime.text = upcoming?[indexPath.row].event_time
+            }
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: teamsCellReuseIdentifier, for: indexPath) as! LeaguesTeamsCellCollectionViewCell
@@ -265,16 +268,19 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LeaguesUpCommingEventsCollectionViewCell
             // Configure the custom cell for the bottom section
             // cell.customLabel.text = "Bottom Item \(indexPath.row + 1)"
-            cell.firstTeamName.text = latest?[indexPath.row].event_home_team
-            cell.secTeamName.text = latest?[indexPath.row].event_away_team
-            let imgUrl = URL(string: self.latest?[indexPath.row].home_team_logo ?? "")
-            cell.firstTeamImage.kf.setImage(with: imgUrl, placeholder: UIImage(named: "barcelona"))
-            let imgUrl1 = URL(string: self.latest?[indexPath.row].away_team_logo ?? "")
-            cell.secTeamImage.kf.setImage(with: imgUrl1, placeholder: UIImage(named: "barcelona"))
-            cell.matchDate.text = latest?[indexPath.row].event_date
-            cell.matchTime.text = latest?[indexPath.row].event_time
-            cell.result.text = latest?[indexPath.row].event_final_result
-            
+            if latest?.count == 0{
+                cell.imgView.image = UIImage(named: "nodata")
+            }else{
+                cell.firstTeamName.text = latest?[indexPath.row].event_home_team
+                cell.secTeamName.text = latest?[indexPath.row].event_away_team
+                let imgUrl = URL(string: self.latest?[indexPath.row].home_team_logo ?? "")
+                cell.firstTeamImage.kf.setImage(with: imgUrl, placeholder: UIImage(named: "barcelona"))
+                let imgUrl1 = URL(string: self.latest?[indexPath.row].away_team_logo ?? "")
+                cell.secTeamImage.kf.setImage(with: imgUrl1, placeholder: UIImage(named: "barcelona"))
+                cell.matchDate.text = latest?[indexPath.row].event_date
+                cell.matchTime.text = latest?[indexPath.row].event_time
+                cell.result.text = latest?[indexPath.row].event_final_result
+            }
             return cell
         default:
             fatalError("Unexpected section")

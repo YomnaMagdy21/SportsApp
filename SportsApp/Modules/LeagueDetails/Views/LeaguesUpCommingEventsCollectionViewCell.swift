@@ -17,13 +17,27 @@ class LeaguesUpCommingEventsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var matchTime: UILabel!
     
     @IBOutlet weak var result: UILabel!
+    let imgView = UIImageView()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         //adding commient
         setupUI()
+//        
+//        imgView.frame = CGRect(x: 1, y: 40, width: frame.width, height: frame.height - 40)
+//        addSubview(imgView)
         
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
+        imgView.frame = CGRect(x: 1, y: 40, width: frame.width, height: frame.height - 40)
+        addSubview(imgView)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     private func setupUI() {
          // Set border color and width
