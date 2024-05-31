@@ -19,6 +19,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
     var leagueName:String?
     var leagueLogo:String?
     var isHeartFilled = false
+    var sportsType : String?
     var activityIndicator: UIActivityIndicatorView!
     let imgView = UIImageView()
     let imgView2 = UIImageView()
@@ -75,7 +76,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
                             }
             
         }
-        leagueDetailsViewModel?.fetchTeams(leagueId: leagueId ?? 0)
+        leagueDetailsViewModel?.fetchTeams(leagueId: leagueId ?? 0 , sportsType: sportsType ?? "football")
 
         leagueDetailsViewModel?.bindUpcomingEvent = {[weak self] in
             DispatchQueue.main.async {
@@ -88,7 +89,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
             }
             
         }
-        leagueDetailsViewModel?.getUpcomingResult(sportName: "football", leagueId: leagueId ?? 0 )
+        leagueDetailsViewModel?.getUpcomingResult(sportName: sportsType ?? "football", leagueId: leagueId ?? 0 )
         
         leagueDetailsViewModel?.bindLatestEvent = {[weak self] in
             DispatchQueue.main.async {
@@ -101,7 +102,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
             }
             
         }
-        leagueDetailsViewModel?.getLatestResult(sportName: "football", leagueId: leagueId ?? 0 )
+        leagueDetailsViewModel?.getLatestResult(sportName: sportsType ?? "football", leagueId: leagueId ?? 0 )
         
         let upcomingEventsNib = UINib(nibName: "LeaguesUpCommingEventsCollectionViewCell", bundle: nil)
         self.collectionView!.register(upcomingEventsNib, forCellWithReuseIdentifier: reuseIdentifier)
@@ -231,11 +232,11 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
         switch section {
         case 0:
             print("uppppp: \(upcoming?.count)")
-            return upcoming?.count ?? 1
+            return upcoming?.count ?? 0
         case 1:
-            return leagueDetailsViewModel?.teams?.count ?? 5
+            return leagueDetailsViewModel?.teams?.count ?? 0
         case 2:
-            return latest?.count ?? 1
+            return latest?.count ?? 0
         default:
             fatalError("Unexpected section")
         }

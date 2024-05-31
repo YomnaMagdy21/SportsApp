@@ -15,6 +15,7 @@ private let bottomSectionReuseIdentifier = "BottomSectionCell"
 class TeamDetailCollectionViewController: UICollectionViewController {
     var teamDetailsViewModel:TeamDetailsViewModel?
     var teamKey: Int?
+    var sportsType : String?
     var activityIndicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {
@@ -41,7 +42,7 @@ class TeamDetailCollectionViewController: UICollectionViewController {
                             }
             
         }
-        teamDetailsViewModel?.fetchTeamDetails(teamId: teamKey ?? -1)
+        teamDetailsViewModel?.fetchTeamDetails(teamId: teamKey ?? -1 , sportsType: sportsType ?? "football")
         let upcomingEventsNib = UINib(nibName: "TeamDetailsTopSectionCollectionViewCell", bundle: nil)
         self.collectionView!.register(upcomingEventsNib, forCellWithReuseIdentifier: reuseIdentifier)
         
