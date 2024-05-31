@@ -65,7 +65,7 @@ class NetworkServices : NetworkServicesProtocol{
         }
     }
     func fetchUpcomingData(sportType: String, leagueId : Int, compilitionHandler: @escaping (Events?, Error?) -> Void) {
-        let url = "https://apiv2.allsportsapi.com/\(sportType)/?met=Fixtures&&leagueId=\(leagueId)&from=2024-05-18&to=2024-06-30&APIkey=\(apiKey)"
+        let url = "https://apiv2.allsportsapi.com/\(sportType)/?met=Fixtures&&leagueId=\(leagueId)&from=2024-05-30&to=2024-08-30&APIkey=\(apiKey)"
         Alamofire.request(url).responseData { response in
             switch response.result {
             case .success(let data):

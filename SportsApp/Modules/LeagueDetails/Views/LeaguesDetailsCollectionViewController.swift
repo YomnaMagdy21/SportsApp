@@ -20,8 +20,11 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
     var leagueLogo:String?
     var isHeartFilled = false
     var activityIndicator: UIActivityIndicatorView!
+    let imgView = UIImageView()
+    let imgView2 = UIImageView()
+    
 
-
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "League Details"
@@ -35,7 +38,8 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
               activityIndicator.startAnimating()
 
         collectionView.isHidden = true
-
+      
+       
         
         leagueDetailsViewModel = LeaguesDetailsViewModel()
         navigationItem.leftBarButtonItem = createCustomBackButton()
@@ -110,6 +114,15 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
                                 withReuseIdentifier: SectionHeaderView.reuseIdentifier)
         
         collectionView.setCollectionViewLayout(createLayout(), animated: false)
+        
+//        imgView.frame = CGRect(x: 0, y: 0, width: 150, height: 200)
+//               view.addSubview(imgView)
+//      //  imgView.isHidden = true
+//        self.imgView.isHidden = (self.upcoming?.isEmpty == false)
+//        imgView2.frame = CGRect(x: 0, y: 0, width: 150, height: 200)
+//               view.addSubview(imgView2)
+//      //  imgView.isHidden = true
+//        self.imgView2.isHidden = (self.latest?.isEmpty == false)
     }
     @objc func backButtonTapped() {
            dismiss(animated: true, completion: nil)
@@ -217,11 +230,12 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return upcoming?.count ?? 5// Assuming one item for the top and bottom sections
+            print("uppppp: \(upcoming?.count)")
+            return upcoming?.count ?? 1
         case 1:
-            return leagueDetailsViewModel?.teams?.count ?? 5 // Return count of teams array for the second section
+            return leagueDetailsViewModel?.teams?.count ?? 5
         case 2:
-            return latest?.count ?? 5
+            return latest?.count ?? 1
         default:
             fatalError("Unexpected section")
         }
@@ -232,16 +246,25 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LeaguesUpCommingEventsCollectionViewCell
             // Configure the custom cell
             // cell.customLabel.text = "Item \(indexPath.row + 1)"
-            cell.result.text = "VS"
-            cell.firstTeamName.text = upcoming?[indexPath.row].event_home_team
-            cell.secTeamName.text = upcoming?[indexPath.row].event_away_team
-            let imgUrl = URL(string: self.upcoming?[indexPath.row].home_team_logo ?? "")
-            cell.firstTeamImage.kf.setImage(with: imgUrl, placeholder: UIImage(named: "barcelona"))
-            let imgUrl1 = URL(string: self.upcoming?[indexPath.row].away_team_logo ?? "")
-            cell.secTeamImage.kf.setImage(with: imgUrl1, placeholder: UIImage(named: "barcelona"))
-            cell.matchDate.text = upcoming?[indexPath.row].event_date
-            cell.matchTime.text = upcoming?[indexPath.row].event_time
-            
+           
+            if upcoming?.count == nil{
+                print("no dataaaaaaaaa in upcominggggggg")
+                imgView.isHidden = false
+//                cell.layer.borderColor = UIColor(hex: "#ffffff", alpha: 0.8).cgColor
+//             
+                cell.imgView.image = UIImage(named: "noresult")
+            }else{
+                imgView.isHidden = true
+                cell.result.text = "VS"
+                cell.firstTeamName.text = upcoming?[indexPath.row].event_home_team
+                cell.secTeamName.text = upcoming?[indexPath.row].event_away_team
+                let imgUrl = URL(string: self.upcoming?[indexPath.row].home_team_logo ?? "")
+                cell.firstTeamImage.kf.setImage(with: imgUrl, placeholder: UIImage(named: "barcelona"))
+                let imgUrl1 = URL(string: self.upcoming?[indexPath.row].away_team_logo ?? "")
+                cell.secTeamImage.kf.setImage(with: imgUrl1, placeholder: UIImage(named: "barcelona"))
+                cell.matchDate.text = upcoming?[indexPath.row].event_date
+                cell.matchTime.text = upcoming?[indexPath.row].event_time
+            }
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: teamsCellReuseIdentifier, for: indexPath) as! LeaguesTeamsCellCollectionViewCell
@@ -265,16 +288,22 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LeaguesUpCommingEventsCollectionViewCell
             // Configure the custom cell for the bottom section
             // cell.customLabel.text = "Bottom Item \(indexPath.row + 1)"
-            cell.firstTeamName.text = latest?[indexPath.row].event_home_team
-            cell.secTeamName.text = latest?[indexPath.row].event_away_team
-            let imgUrl = URL(string: self.latest?[indexPath.row].home_team_logo ?? "")
-            cell.firstTeamImage.kf.setImage(with: imgUrl, placeholder: UIImage(named: "barcelona"))
-            let imgUrl1 = URL(string: self.latest?[indexPath.row].away_team_logo ?? "")
-            cell.secTeamImage.kf.setImage(with: imgUrl1, placeholder: UIImage(named: "barcelona"))
-            cell.matchDate.text = latest?[indexPath.row].event_date
-            cell.matchTime.text = latest?[indexPath.row].event_time
-            cell.result.text = latest?[indexPath.row].event_final_result
-            
+            if latest?.count == nil{
+                imgView2.isHidden = false
+                
+                cell.imgView2.image = UIImage(named: "noresult")
+            }else{
+                imgView2.isHidden = true
+                cell.firstTeamName.text = latest?[indexPath.row].event_home_team
+                cell.secTeamName.text = latest?[indexPath.row].event_away_team
+                let imgUrl = URL(string: self.latest?[indexPath.row].home_team_logo ?? "")
+                cell.firstTeamImage.kf.setImage(with: imgUrl, placeholder: UIImage(named: "barcelona"))
+                let imgUrl1 = URL(string: self.latest?[indexPath.row].away_team_logo ?? "")
+                cell.secTeamImage.kf.setImage(with: imgUrl1, placeholder: UIImage(named: "barcelona"))
+                cell.matchDate.text = latest?[indexPath.row].event_date
+                cell.matchTime.text = latest?[indexPath.row].event_time
+                cell.result.text = latest?[indexPath.row].event_final_result
+            }
             return cell
         default:
             fatalError("Unexpected section")

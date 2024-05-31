@@ -27,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           UITabBar.appearance().tintColor = UIColor(hex: "#006400", alpha: 0.8)
 
           UIButton.appearance().tintColor = UIColor(hex: "#006400", alpha: 0.8)
+        
+        Thread.sleep(forTimeInterval: 3)
 
         return true
     }
