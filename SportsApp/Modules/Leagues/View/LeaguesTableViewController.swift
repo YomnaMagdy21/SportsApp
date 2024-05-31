@@ -89,6 +89,7 @@ class LeaguesTableViewController: UITableViewController ,SFSafariViewControllerD
             leagueDetailsCollectionViewController.leagueId = self.league?[indexPath.row].league_key
             leagueDetailsCollectionViewController.leagueName = self.league?[indexPath.row].league_name
             leagueDetailsCollectionViewController.leagueLogo = self.league?[indexPath.row].league_logo
+            leagueDetailsCollectionViewController.sportsType = sportType
             
             // Set the presentation style to full screen
             navigationController.modalPresentationStyle = .fullScreen
