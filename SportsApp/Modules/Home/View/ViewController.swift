@@ -22,18 +22,21 @@ class ViewController: UIViewController , UICollectionViewDelegate, UICollectionV
         // Do any additional setup after loading the view.
         collectionView.dataSource = self
         collectionView.delegate = self
-        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.estimatedItemSize = .zero
-            layout.itemSize = .zero
-            layout.minimumLineSpacing = 20
-            layout.minimumInteritemSpacing = 0
-               }
+        let layout = UICollectionViewFlowLayout()
+        layout.estimatedItemSize = .zero
+        layout.itemSize = .zero
+        layout.minimumLineSpacing = 20
+        layout.minimumInteritemSpacing = 0
+
+        collectionView.collectionViewLayout = layout
+
         
         do {
                     try reachability.startNotifier()
                 } catch {
                     print("Unable to start notifier")
                 }
+        
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -73,7 +76,7 @@ class ViewController: UIViewController , UICollectionViewDelegate, UICollectionV
                     
                  
                     alertController.addAction(okAction)
-                    
+            present(alertController, animated: true, completion: nil)
                     
        
         }

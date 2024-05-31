@@ -18,27 +18,30 @@ class LeaguesUpCommingEventsCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var result: UILabel!
     let imgView = UIImageView()
+    let imgView2 = UIImageView()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         //adding commient
         setupUI()
-//        
+        
+        imgView.frame = CGRect(x: 1, y: 20, width: 400, height: frame.height )
+        addSubview(imgView)
+        
+        imgView2.frame = CGRect(x: 1, y: 20, width: 400, height: frame.height )
+        addSubview(imgView2)
+    }
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//
 //        imgView.frame = CGRect(x: 1, y: 40, width: frame.width, height: frame.height - 40)
 //        addSubview(imgView)
-        
-    }
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-
-        imgView.frame = CGRect(x: 1, y: 40, width: frame.width, height: frame.height - 40)
-        addSubview(imgView)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+//    }
+//
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     private func setupUI() {
          // Set border color and width
         self.layer.borderColor = UIColor(hex: "#006400", alpha: 0.8).cgColor

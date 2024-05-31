@@ -24,7 +24,7 @@ class FavTableViewController: UITableViewController ,SFSafariViewControllerDeleg
        
         tableView.separatorStyle = .none
           tableView.tableFooterView = UIView()
-        self.tabBarItem.title = "Favorite"
+        
 
         do {
                     try reachability.startNotifier()
@@ -33,6 +33,7 @@ class FavTableViewController: UITableViewController ,SFSafariViewControllerDeleg
                 }
     }
     override func viewWillAppear(_ animated: Bool) {
+        self.tabBarItem.title = "Favorite"
         favViewModel = FavViewModel()
         league = favViewModel?.getFavData()
        
@@ -114,18 +115,19 @@ class FavTableViewController: UITableViewController ,SFSafariViewControllerDeleg
                 } else {
                     print("No league item found at index \(indexPath.row)")
                 }
-            }else{
-                let alertController = UIAlertController(title: "Network Error!", message: "The device isn't connected to network, recheck the internet correctivily", preferredStyle: .alert)
-                        
-                      
-                        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                        
-                     
-                        alertController.addAction(okAction)
-                        
-                        
-                        present(alertController, animated: true, completion: nil)
             }
+        }
+        else{
+            let alertController = UIAlertController(title: "Network Error!", message: "The device isn't connected to network, recheck the internet correctivily", preferredStyle: .alert)
+                    
+                  
+                    let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    
+                 
+                    alertController.addAction(okAction)
+                    
+                    
+                    present(alertController, animated: true, completion: nil)
         }
     }
 
