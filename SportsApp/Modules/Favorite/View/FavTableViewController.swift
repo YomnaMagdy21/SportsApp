@@ -131,6 +131,36 @@ class FavTableViewController: UITableViewController ,SFSafariViewControllerDeleg
         }
     }
 
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let headerView = UIView()
+        
+        let headerLabel = UILabel()
+        headerLabel.text = "Favorite"
+        headerLabel.textColor = UIColor(hex: "#006400", alpha: 0.8)
+        headerLabel.textAlignment = .center
+        headerLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        headerLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        headerView.addSubview(headerLabel)
+        
+       
+        NSLayoutConstraint.activate([
+            headerLabel.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
+            headerLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
+            headerLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 8),
+            headerLabel.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -8)
+        ])
+        
+        return headerView
+    }
+
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40.0
+    }
+
 
   
     @IBAction func showVideo(_ sender: Any) {

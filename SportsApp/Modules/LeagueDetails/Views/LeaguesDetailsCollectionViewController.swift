@@ -24,11 +24,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
     let imgView2 = UIImageView()
     
 
-    override func viewWillAppear(_ animated: Bool) {
-        
-        
-       
-    }
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "League Details"
