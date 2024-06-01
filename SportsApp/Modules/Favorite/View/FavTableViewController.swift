@@ -36,7 +36,7 @@ class FavTableViewController: UITableViewController ,SFSafariViewControllerDeleg
         self.tabBarItem.title = "Favorite"
         favViewModel = FavViewModel()
         league = favViewModel?.getFavData()
-       
+        print("sport type:\(league?.first?.sportType)")
         tableView.reloadData()
         
     }
@@ -106,6 +106,8 @@ class FavTableViewController: UITableViewController ,SFSafariViewControllerDeleg
                     leagueDetailsCollectionViewController.leagueId = favItem.league_key
                     leagueDetailsCollectionViewController.leagueName = favItem.league_name
                     leagueDetailsCollectionViewController.leagueLogo = favItem.league_logo ?? "barcelona"
+                    leagueDetailsCollectionViewController.sportsType =
+                    favItem.sportType
                     
                     
                     navigationController.modalPresentationStyle = .fullScreen

@@ -39,8 +39,9 @@ final class DbServicesImplTests: XCTestCase {
     func testAddLeague() {
         let leagueName = "Test League"
         let leagueLogo = "test_logo.png"
+        let sportsType = "football"
         
-        coreDataManager.addLeague(leagueName: leagueName, leagueLogo: leagueLogo, leagueKey: testLeagueKey)
+        coreDataManager.addLeague(leagueName: leagueName, leagueLogo: leagueLogo, leagueKey: testLeagueKey, sportName: sportsType)
         
         XCTAssertTrue(coreDataManager.checkLeaguesData(leagueKey: testLeagueKey), "League should exist in Core Data after saving")
     }
@@ -48,8 +49,9 @@ final class DbServicesImplTests: XCTestCase {
     func testDeleteLeague() {
         let leagueName = "Test League"
         let leagueLogo = "test_logo.png"
-        
-        coreDataManager.addLeague(leagueName: leagueName, leagueLogo: leagueLogo, leagueKey: testLeagueKey)
+        let sportsType = "football"
+
+        coreDataManager.addLeague(leagueName: leagueName, leagueLogo: leagueLogo, leagueKey: testLeagueKey, sportName: sportsType)
         coreDataManager.deleteLeague(leagueKey: testLeagueKey)
         
         XCTAssertFalse(coreDataManager.checkLeaguesData(leagueKey: testLeagueKey), "League should not exist in Core Data after deletion")
@@ -59,15 +61,19 @@ final class DbServicesImplTests: XCTestCase {
             let leagueName1 = "Test League 1"
             let leagueLogo1 = "test_logo1.png"
             let leagueKey1 = 101
+        let sportsType1 = "football"
+
             
             let leagueName2 = "Test League 2"
             let leagueLogo2 = "test_logo2.png"
             let leagueKey2 = 102
+        let sportsType2 = "football"
+
             
             let initialCount = coreDataManager.fetchLeaguesData().count
             
-            coreDataManager.addLeague(leagueName: leagueName1, leagueLogo: leagueLogo1, leagueKey: leagueKey1)
-            coreDataManager.addLeague(leagueName: leagueName2, leagueLogo: leagueLogo2, leagueKey: leagueKey2)
+        coreDataManager.addLeague(leagueName: leagueName1, leagueLogo: leagueLogo1, leagueKey: leagueKey1, sportName: sportsType1)
+        coreDataManager.addLeague(leagueName: leagueName2, leagueLogo: leagueLogo2, leagueKey: leagueKey2, sportName: sportsType2)
             
             let retrievedLeagues = coreDataManager.fetchLeaguesData()
             
@@ -89,8 +95,10 @@ final class DbServicesImplTests: XCTestCase {
     func testCheckLeaguesData() {
         let leagueName = "Test League"
         let leagueLogo = "test_logo.png"
+        let sportsType = "football"
+
         
-        coreDataManager.addLeague(leagueName: leagueName, leagueLogo: leagueLogo, leagueKey: testLeagueKey)
+        coreDataManager.addLeague(leagueName: leagueName, leagueLogo: leagueLogo, leagueKey: testLeagueKey, sportName: sportsType)
         
         let exists = coreDataManager.checkLeaguesData(leagueKey: testLeagueKey)
         

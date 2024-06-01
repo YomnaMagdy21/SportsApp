@@ -73,8 +73,8 @@ class LeaguesDetailsViewModel{
     }
     
     // db functions
-    func addLeague(leagueName: String, leagueLogo: String, leagueKey: Int) {
-          dbService.addLeague(leagueName: leagueName, leagueLogo: leagueLogo, leagueKey: leagueKey)
+    func addLeague(leagueName: String, leagueLogo: String, leagueKey: Int,sportName: String) {
+          dbService.addLeague(leagueName: leagueName, leagueLogo: leagueLogo, leagueKey: leagueKey,sportName: sportName)
       }
       
     func deleteLeague(leagueKey: Int) {
