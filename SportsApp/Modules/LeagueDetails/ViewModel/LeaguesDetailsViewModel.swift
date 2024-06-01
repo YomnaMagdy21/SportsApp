@@ -27,7 +27,7 @@ class LeaguesDetailsViewModel{
     func fetchTeams(leagueId: Int , sportsType:String){
         networkService.fetchTeamsData(leagueId: leagueId, sportsType: sportsType) { response, error in
             if let error = error {
-                print("Error: \(error.localizedDescription)")
+//                print("Error: \(error.localizedDescription)")
                 // Handle the error
             } else if let response = response {
                 self.teams = response.result

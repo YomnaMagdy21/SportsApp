@@ -56,8 +56,8 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fcbarchelona" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jzi-01-3Du">
-                        <rect key="frame" x="15.999999999999993" y="109" width="99.333333333333314" height="20.333333333333343"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="psg" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jzi-01-3Du">
+                        <rect key="frame" x="10" y="109" width="81" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -69,13 +69,13 @@
             <constraints>
                 <constraint firstItem="Jzi-01-3Du" firstAttribute="bottom" secondItem="EMQ-n5-eLx" secondAttribute="bottom" id="28r-DJ-KM5"/>
                 <constraint firstItem="EMQ-n5-eLx" firstAttribute="top" secondItem="9aW-ZI-xcD" secondAttribute="bottom" constant="4.6666666666666288" id="5Aa-Fc-0JI"/>
-                <constraint firstItem="GOA-c3-EWB" firstAttribute="leading" secondItem="Jzi-01-3Du" secondAttribute="trailing" constant="25.666666666666686" id="6D1-gJ-wbA"/>
+                <constraint firstItem="GOA-c3-EWB" firstAttribute="leading" secondItem="Jzi-01-3Du" secondAttribute="trailing" constant="50" id="6D1-gJ-wbA"/>
                 <constraint firstItem="Mqn-Db-Rdn" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="9MS-66-dLu"/>
                 <constraint firstItem="Jzi-01-3Du" firstAttribute="top" secondItem="gNv-8F-ktO" secondAttribute="bottom" constant="9" id="Akc-9R-deq"/>
-                <constraint firstItem="Jzi-01-3Du" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="Flr-sb-Iry"/>
                 <constraint firstItem="Mqn-Db-Rdn" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="74.666666666666686" id="GUS-Bf-q9d"/>
                 <constraint firstItem="Jzi-01-3Du" firstAttribute="top" secondItem="EMQ-n5-eLx" secondAttribute="top" id="IsV-8v-cdB"/>
                 <constraint firstItem="9aW-ZI-xcD" firstAttribute="centerX" secondItem="EMQ-n5-eLx" secondAttribute="centerX" constant="4.5" id="LEc-Cf-HCs"/>
+                <constraint firstItem="Jzi-01-3Du" firstAttribute="centerX" secondItem="gNv-8F-ktO" secondAttribute="centerX" constant="-3" id="LHW-DB-FHM"/>
                 <constraint firstItem="Mqn-Db-Rdn" firstAttribute="centerX" secondItem="Dxg-DC-hpS" secondAttribute="centerX" id="ODl-AV-qgH"/>
                 <constraint firstAttribute="trailing" secondItem="9aW-ZI-xcD" secondAttribute="trailing" constant="16" id="SKZ-Dk-vA2"/>
                 <constraint firstItem="Mqn-Db-Rdn" firstAttribute="centerX" secondItem="GOA-c3-EWB" secondAttribute="centerX" id="Tc0-C5-Qgv"/>
@@ -100,7 +100,7 @@
                 <outlet property="secTeamImage" destination="9aW-ZI-xcD" id="mE2-fp-YFr"/>
                 <outlet property="secTeamName" destination="EMQ-n5-eLx" id="PI2-Er-M1u"/>
             </connections>
-            <point key="canvasLocation" x="237.59999999999999" y="53.571428571428577"/>
+            <point key="canvasLocation" x="216.80000000000001" y="53.571428571428577"/>
         </collectionViewCell>
     </objects>
     <resources>
