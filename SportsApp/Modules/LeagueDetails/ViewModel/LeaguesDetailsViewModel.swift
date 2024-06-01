@@ -8,8 +8,8 @@
 import Foundation
 
 class LeaguesDetailsViewModel{
-    let networkService = NetworkServices()
-    let dbService = DbServicesImpl()
+    var networkService : NetworkServicesProtocol = NetworkServices()
+    var dbService = DbServicesImpl()
     var bindTeamsLeague : (() -> ()) = {}
     var teams: [Result]?{
         didSet{
@@ -24,8 +24,8 @@ class LeaguesDetailsViewModel{
     var bindLatestEvent : (() -> ()) = {}
     var latestResult : [EventsData]?
     
-    func fetchTeams(leagueId: Int){
-        networkService.fetchTeamsData(leagueId: leagueId) { response, error in
+    func fetchTeams(leagueId: Int , sportsType:String){
+        networkService.fetchTeamsData(leagueId: leagueId, sportsType: sportsType) { response, error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
                 // Handle the error

@@ -16,8 +16,8 @@ class TeamDetailsViewModel{
             print(teams?.first?.team_name ?? "empty")
         }
     }
-    func fetchTeamDetails(teamId: Int){
-        networkService.fetchTeamsDetails(teamId: teamId) { response, error in
+    func fetchTeamDetails(teamId: Int , sportsType: String){
+        networkService.fetchTeamsDetails(teamId: teamId , sportsType: sportsType) { response, error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
                 // Handle the error

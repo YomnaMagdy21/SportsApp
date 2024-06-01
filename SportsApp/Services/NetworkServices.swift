@@ -9,8 +9,8 @@ import Foundation
 import Alamofire
 //import SwiftyJSON
 protocol NetworkServicesProtocol {
-    func fetchTeamsData(leagueId: Int, completion: @escaping (LeagueTeamsResponse?, Error?) -> Void)
-    func fetchTeamsDetails(teamId: Int, completion: @escaping (LeagueTeamsResponse?, Error?) -> Void)
+    func fetchTeamsData(leagueId: Int, sportsType: String, completion: @escaping (LeagueTeamsResponse?, Error?) -> Void)
+    func fetchTeamsDetails(teamId: Int, sportsType: String, completion: @escaping (LeagueTeamsResponse?, Error?) -> Void)
     func fetchLeaguesData(sportType : String,compilitionHandler : @escaping (Leagues?,Error?)-> Void)
     func fetchUpcomingData(sportType : String,leagueId : Int,compilitionHandler : @escaping (Events?,Error?)-> Void)
 
@@ -22,8 +22,8 @@ class NetworkServices : NetworkServicesProtocol{
    
     
     let apiKey = "f57878d825c89df62d445853dcdf0e4cfe1c1cd108eb2237ac13055246f330d6"
-    func fetchTeamsData(leagueId: Int, completion: @escaping (LeagueTeamsResponse?, Error?) -> Void) {
-        let url = "https://apiv2.allsportsapi.com/football/"
+    func fetchTeamsData(leagueId: Int, sportsType: String, completion: @escaping (LeagueTeamsResponse?, Error?) -> Void) {
+        let url = "https://apiv2.allsportsapi.com/\(sportsType)/"
         let parameters: [String: Any] = [
             "met": "Teams",
             "APIkey": apiKey,
@@ -31,14 +31,11 @@ class NetworkServices : NetworkServicesProtocol{
         ]
         
         Alamofire.request(url, parameters: parameters).responseData { response in
-//            print(response)
             switch response.result {
             case .success(let data):
                 do {
-//                    print("Received data: \(String(data: data, encoding: .utf8) ?? "Empty data")")
                     let teamsResponseDecoded = try JSONDecoder().decode(LeagueTeamsResponse.self, from: data)
                     completion(teamsResponseDecoded, nil)
-//                    print(teamsResponseDecoded)
                 } catch {
                     completion(nil, error)
                 }
@@ -47,6 +44,7 @@ class NetworkServices : NetworkServicesProtocol{
             }
         }
     }
+
    //leagues
     func fetchLeaguesData(sportType: String, compilitionHandler completionHandler: @escaping (Leagues?, Error?) -> Void) {
         let url = "https://apiv2.allsportsapi.com/\(sportType)?met=Leagues&APIkey=\(apiKey)"
@@ -65,7 +63,7 @@ class NetworkServices : NetworkServicesProtocol{
         }
     }
     func fetchUpcomingData(sportType: String, leagueId : Int, compilitionHandler: @escaping (Events?, Error?) -> Void) {
-        let url = "https://apiv2.allsportsapi.com/\(sportType)/?met=Fixtures&&leagueId=\(leagueId)&from=2024-05-18&to=2024-06-30&APIkey=\(apiKey)"
+        let url = "https://apiv2.allsportsapi.com/\(sportType)/?met=Fixtures&&leagueId=\(leagueId)&from=2024-05-30&to=2024-08-30&APIkey=\(apiKey)"
         Alamofire.request(url).responseData { response in
             switch response.result {
             case .success(let data):
@@ -103,9 +101,8 @@ class NetworkServices : NetworkServicesProtocol{
     }
     
     // fetchTeamDetails
-    func fetchTeamsDetails(teamId: Int, completion: @escaping (LeagueTeamsResponse?, Error?) -> Void)
-    {
-        let url = "https://apiv2.allsportsapi.com/football/"
+    func fetchTeamsDetails(teamId: Int, sportsType: String, completion: @escaping (LeagueTeamsResponse?, Error?) -> Void) {
+        let url = "https://apiv2.allsportsapi.com/\(sportsType)/"
         let parameters: [String: Any] = [
             "met": "Teams",
             "APIkey": apiKey,
@@ -113,14 +110,11 @@ class NetworkServices : NetworkServicesProtocol{
         ]
         
         Alamofire.request(url, parameters: parameters).responseData { response in
-//            print(response)
             switch response.result {
             case .success(let data):
                 do {
-//                    print("Received data: \(String(data: data, encoding: .utf8) ?? "Empty data")")
                     let teamsResponseDecoded = try JSONDecoder().decode(LeagueTeamsResponse.self, from: data)
                     completion(teamsResponseDecoded, nil)
-//                    print(teamsResponseDecoded)
                 } catch {
                     completion(nil, error)
                 }
@@ -128,8 +122,8 @@ class NetworkServices : NetworkServicesProtocol{
                 completion(nil, error)
             }
         }
-        
     }
+
     
 
 }

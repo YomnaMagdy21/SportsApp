@@ -21,7 +21,7 @@ final class MokNetwork: XCTestCase {
         mockObj = nil
     }
     func testMockFetchTeamsData(){
-        mockObj?.fetchTeamsData(leagueId: 206) { result , error in
+        mockObj?.fetchTeamsData(leagueId: 206, sportsType: "football") { result , error in
             if let error = error {
                 XCTFail()
             }else{
@@ -65,7 +65,7 @@ final class MokNetwork: XCTestCase {
         }
 
     func testMockFetchTeamsDetailsData(){
-        mockObj?.fetchTeamsDetails(teamId: 4977){ result , error in
+        mockObj?.fetchTeamsDetails(teamId: 4977, sportsType: "football"){ result , error in
             if let error = error {
                 XCTFail()
             }else{

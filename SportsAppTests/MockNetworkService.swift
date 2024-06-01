@@ -30,20 +30,21 @@ class MockNetworkService{
 }
 
 extension MockNetworkService : NetworkServicesProtocol{
-    func fetchTeamsData(leagueId: Int, completion: @escaping (SportsApp.LeagueTeamsResponse?, Error?) -> Void) {
-        do{
-            let data = Data(fakeLeagueTeamsResponse.utf8)
-            
-          
-            leagueTeamsResponse = try JSONDecoder().decode(LeagueTeamsResponse.self, from: data)
-            completion(leagueTeamsResponse, nil)
-        }catch{
-            print(error.localizedDescription)
-            completion(nil,error)
-        }
+    func fetchTeamsData(leagueId: Int, sportsType: String, completion: @escaping (SportsApp.LeagueTeamsResponse?, Error?) -> Void) {
+        
+            do{
+                let data = Data(fakeLeagueTeamsResponse.utf8)
+                
+              
+                leagueTeamsResponse = try JSONDecoder().decode(LeagueTeamsResponse.self, from: data)
+                completion(leagueTeamsResponse, nil)
+            }catch{
+                print(error.localizedDescription)
+                completion(nil,error)
+            }
     }
     
-    func fetchTeamsDetails(teamId: Int, completion: @escaping (SportsApp.LeagueTeamsResponse?, Error?) -> Void) {
+    func fetchTeamsDetails(teamId: Int, sportsType: String, completion: @escaping (SportsApp.LeagueTeamsResponse?, Error?) -> Void) {
         do{
             let data = Data(fakeLeagueTeamsResponse.utf8)
             
@@ -55,6 +56,9 @@ extension MockNetworkService : NetworkServicesProtocol{
             completion(nil,error)
         }
     }
+    
+   
+ 
     
     func fetchLeaguesData(sportType: String, compilitionHandler: @escaping (SportsApp.Leagues?, Error?) -> Void) {
         do{
