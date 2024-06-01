@@ -36,7 +36,7 @@ final class LeaguesDetailsViewModelTests: XCTestCase {
             expectation.fulfill()
         }
         
-        viewModel.fetchTeams(leagueId: 1)
+        viewModel.fetchTeams(leagueId: 1 , sportsType: "football")
         waitForExpectations(timeout: 5, handler: nil)
         
         XCTAssertNotNil(networkServicesMock.leagueTeamsResponse, "leagueTeamsResponse should not be nil")
