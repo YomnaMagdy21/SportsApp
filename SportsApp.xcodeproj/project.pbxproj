@@ -30,9 +30,6 @@
 		07D0E9D82BF9221E003F0DCC /* LeaguesDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D0E9D72BF9221E003F0DCC /* LeaguesDetailsViewModel.swift */; };
 		07D73CFF2BFE7CF700DC5EA6 /* TeamDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D73CFE2BFE7CF700DC5EA6 /* TeamDetailsResponse.swift */; };
 		07D99F1F2BFD4AA100E9DCE4 /* DbServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D99F1E2BFD4AA100E9DCE4 /* DbServices.swift */; };
-		07D99F2A2BFD54AF00E9DCE4 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D99F292BFD54AF00E9DCE4 /* test.swift */; };
-		07D99F2B2BFD54AF00E9DCE4 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D99F292BFD54AF00E9DCE4 /* test.swift */; };
-		07D99F2C2BFD54AF00E9DCE4 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D99F292BFD54AF00E9DCE4 /* test.swift */; };
 		07E157122BFFC86700FA8A7E /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E157112BFFC86700FA8A7E /* ColorUtils.swift */; };
 		07E157142BFFE6E600FA8A7E /* TeamDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E157132BFFE6E600FA8A7E /* TeamDetailsViewModel.swift */; };
 		07F99B4C2C051C720005EC0E /* MokNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F99B4B2C051C720005EC0E /* MokNetwork.swift */; };
@@ -103,7 +100,6 @@
 		07D0E9D72BF9221E003F0DCC /* LeaguesDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaguesDetailsViewModel.swift; sourceTree = "<group>"; };
 		07D73CFE2BFE7CF700DC5EA6 /* TeamDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailsResponse.swift; sourceTree = "<group>"; };
 		07D99F1E2BFD4AA100E9DCE4 /* DbServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbServices.swift; sourceTree = "<group>"; };
-		07D99F292BFD54AF00E9DCE4 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		07E157112BFFC86700FA8A7E /* ColorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUtils.swift; sourceTree = "<group>"; };
 		07E157132BFFE6E600FA8A7E /* TeamDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailsViewModel.swift; sourceTree = "<group>"; };
 		07F99B4B2C051C720005EC0E /* MokNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MokNetwork.swift; sourceTree = "<group>"; };
@@ -280,7 +276,6 @@
 			isa = PBXGroup;
 			children = (
 				07D99F1E2BFD4AA100E9DCE4 /* DbServices.swift */,
-				07D99F292BFD54AF00E9DCE4 /* test.swift */,
 				07F99B4D2C0520FC0005EC0E /* NetworkServices.swift */,
 			);
 			path = Services;
@@ -697,7 +692,6 @@
 				07D0E9CE2BF920E2003F0DCC /* NetworkUtils.swift in Sources */,
 				47ADF1732BFE8CE7007D192F /* Events.swift in Sources */,
 				07F99B522C05317C0005EC0E /* NewCustomGreenColor.swift in Sources */,
-				07D99F2A2BFD54AF00E9DCE4 /* test.swift in Sources */,
 				472AE0052BF537B0000C97FF /* AppDelegate.swift in Sources */,
 				07F99B4E2C0520FC0005EC0E /* NetworkServices.swift in Sources */,
 				07CF75B02BF7FFD100731DC3 /* SectionHeaderView.swift in Sources */,
@@ -732,7 +726,6 @@
 				4790FDEB2C053A90003B177C /* NetworkTest.swift in Sources */,
 				078A4CB92C0B61E200840592 /* TeamDetailsViewModelTest.swift in Sources */,
 				07F99B4C2C051C720005EC0E /* MokNetwork.swift in Sources */,
-				07D99F2B2BFD54AF00E9DCE4 /* test.swift in Sources */,
 				07D0E9D42BF921CC003F0DCC /* LeaguesTeamsCellCollectionViewCell.swift in Sources */,
 				07F99B542C0548640005EC0E /* FakeCoreData.swift in Sources */,
 			);
@@ -744,7 +737,6 @@
 			files = (
 				472AE0292BF537B4000C97FF /* SportsAppUITests.swift in Sources */,
 				07D0E9D52BF921CC003F0DCC /* LeaguesTeamsCellCollectionViewCell.swift in Sources */,
-				07D99F2C2BFD54AF00E9DCE4 /* test.swift in Sources */,
 				472AE02B2BF537B4000C97FF /* SportsAppUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
