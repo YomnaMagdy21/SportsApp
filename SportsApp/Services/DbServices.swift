@@ -12,7 +12,7 @@ import UIKit
 protocol DbServices {
     func fetchLeaguesData() -> [League]
     func checkLeaguesData(leagueKey: Int) -> Bool
-    func addLeague(leagueName: String, leagueLogo: String, leagueKey: Int)
+    func addLeague(leagueName: String, leagueLogo: String, leagueKey: Int,sportName: String)
     func deleteLeague(leagueKey: Int)
 
 }
@@ -40,9 +40,10 @@ class DbServicesImpl : DbServices{
               for fav in leagues {
                   if let leagueName = fav.value(forKey: "league_name") as? String,
                      let leagueLogo = fav.value(forKey: "league_logo") as? String,
+                     let sportName = fav.value(forKey: "sportType") as? String,
                      let leagueKey = fav.value(forKey: "league_key") as? Int {
                       
-                      let league = League(league_key: leagueKey, league_name: leagueName, league_logo: leagueLogo)
+                      let league = League(league_key: leagueKey, league_name: leagueName, league_logo: leagueLogo,sportType: sportName)
                       leaguesArray.append(league)
                   }
               }
@@ -68,13 +69,14 @@ class DbServicesImpl : DbServices{
     }
 
 
-    func addLeague(leagueName: String, leagueLogo: String, leagueKey: Int) {
+    func addLeague(leagueName: String, leagueLogo: String, leagueKey: Int,sportName: String) {
         let entity = NSEntityDescription.entity(forEntityName: "FavLeagues", in: context)!
         let newLeague = NSManagedObject(entity: entity, insertInto: context)
         
         newLeague.setValue(leagueName, forKey: "league_name")
         newLeague.setValue(leagueLogo, forKey: "league_logo")
         newLeague.setValue(leagueKey, forKey: "league_key")
+        newLeague.setValue(sportName, forKey: "sportType")
         
         do {
             try context.save()

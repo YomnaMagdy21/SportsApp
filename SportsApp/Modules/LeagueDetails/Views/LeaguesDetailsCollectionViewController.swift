@@ -18,6 +18,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
     var leagueId:Int?
     var leagueName:String?
     var leagueLogo:String?
+   // var sportName:String?
     var isHeartFilled = false
     var sportsType : String?
     var activityIndicator: UIActivityIndicatorView!
@@ -133,6 +134,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
         print(leagueId ?? -1)
         print(leagueName ?? "empty leagueName")
         print(leagueLogo ?? "empty leagueLogo")
+        print(sportsType ?? "empty sportName")
         
         // Toggle the heart button state
         isHeartFilled.toggle()
@@ -146,9 +148,10 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
             // Add league to favorites
             if let leagueId = leagueId, let leagueName = leagueName {
                 // Check if leagueLogo is empty
+                let sportType = sportsType ?? ""
                 let logo = leagueLogo ?? ""
                 let leagueLogoToSave = logo.isEmpty ? "https://thumbs.dreamstime.com/b/all-sports-balls-stadium-d-imaginary-sport-modelled-rendered-78672313.jpg" : logo
-                leagueDetailsViewModel?.addLeague(leagueName: leagueName, leagueLogo: leagueLogoToSave, leagueKey: leagueId)
+                leagueDetailsViewModel?.addLeague(leagueName: leagueName, leagueLogo: leagueLogoToSave, leagueKey: leagueId,sportName: sportType)
             }
         } else {
             // Remove league from favorites
