@@ -21,7 +21,8 @@ protocol NetworkServicesProtocol {
 class NetworkServices : NetworkServicesProtocol{
    
     
-    let apiKey = "f57878d825c89df62d445853dcdf0e4cfe1c1cd108eb2237ac13055246f330d6"
+//    let apiKey = "f57878d825c89df62d445853dcdf0e4cfe1c1cd108eb2237ac13055246f330d6"
+    let apiKey = "06e5b4100b6827a20ca9306ba0beff33bd57c75611e05446dee5d4b5e32e8e6c"
     func fetchTeamsData(leagueId: Int, sportsType: String, completion: @escaping (LeagueTeamsResponse?, Error?) -> Void) {
         let url = "https://apiv2.allsportsapi.com/\(sportsType)/"
         let parameters: [String: Any] = [
