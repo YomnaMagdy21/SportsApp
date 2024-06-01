@@ -18,7 +18,7 @@ class DbServicesImplMock: DbServicesImpl {
     var leagueExistsResult: Bool = false
     var leagus: [League] = []
 
-    override func addLeague(leagueName: String, leagueLogo: String, leagueKey: Int) {
+    override  func addLeague(leagueName: String, leagueLogo: String, leagueKey: Int,sportName: String) {
         addLeagueCalled = true
         addedLeague = League(league_key: leagueKey, league_name: leagueName, league_logo: leagueLogo)
         leagus.append(addedLeague!)
