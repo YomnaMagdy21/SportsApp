@@ -22,7 +22,7 @@ final class NetworkTest: XCTestCase {
     }
     func testGetTeamesData(){
         let expectaion = expectation(description: "wait for api")
-        NetworkServices().fetchTeamsData(leagueId: 206){result,error in
+        NetworkServices().fetchTeamsData(leagueId: 206, sportsType: "football"){result,error in
             if let error = error {
                 XCTFail()
                 print(error)
@@ -38,7 +38,7 @@ final class NetworkTest: XCTestCase {
 
     func testGetTeamesDetailsData(){
         let expectaion = expectation(description: "wait for api")
-        NetworkServices().fetchTeamsDetails(teamId: 4977){result,error in
+        NetworkServices().fetchTeamsDetails(teamId: 4977, sportsType: "football"){result,error in
             if let error = error {
                 XCTFail()
                 print(error)
