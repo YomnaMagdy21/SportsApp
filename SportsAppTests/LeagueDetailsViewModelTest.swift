@@ -78,7 +78,7 @@ final class LeaguesDetailsViewModelTests: XCTestCase {
         let initialCount = initialLeagues.count
         
         // Add a new league
-        viewModel.addLeague(leagueName: "Test League", leagueLogo: "test_logo.png", leagueKey: 1)
+        viewModel.addLeague(leagueName: "Test League", leagueLogo: "test_logo.png", leagueKey: 1, sportName: "football")
         
         // Fetch the leagues after adding the new league
         let updatedLeagues = dbServicesMock.fetchLeaguesData()
@@ -95,7 +95,7 @@ final class LeaguesDetailsViewModelTests: XCTestCase {
     
     func testDeleteLeague() {
         // Add a new league
-        viewModel.addLeague(leagueName: "Test League", leagueLogo: "test_logo.png", leagueKey: 1)
+        viewModel.addLeague(leagueName: "Test League", leagueLogo: "test_logo.png", leagueKey: 1, sportName: "football")
         
         // Ensure the league has been added
         XCTAssertTrue(viewModel.leagueExists(leagueKey: 1), "The league should exist in the database after adding it")
@@ -108,7 +108,7 @@ final class LeaguesDetailsViewModelTests: XCTestCase {
     }
 
     func testLeagueExists() {
-        viewModel.addLeague(leagueName: "Test League", leagueLogo: "test_logo.png", leagueKey: 1)
+        viewModel.addLeague(leagueName: "Test League", leagueLogo: "test_logo.png", leagueKey: 1, sportName: "football")
         let exists = viewModel.leagueExists(leagueKey: 1)
         
         XCTAssertTrue(exists)
