@@ -378,6 +378,7 @@ class LeaguesDetailsCollectionViewController: UICollectionViewController {
         let storyboard = UIStoryboard(name: "SecStoryboard", bundle: nil)
         if let teamDetailsVC = storyboard.instantiateViewController(withIdentifier: "TeamDetailCollectionViewController") as? TeamDetailCollectionViewController {
             teamDetailsVC.teamKey = teamKey
+            teamDetailsVC.sportsType = sportsType
             navigationController?.pushViewController(teamDetailsVC, animated: true)
         }
     }

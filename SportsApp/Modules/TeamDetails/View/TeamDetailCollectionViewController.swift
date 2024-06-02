@@ -24,6 +24,7 @@ class TeamDetailCollectionViewController: UICollectionViewController {
         activityIndicator.center = view.center
         activityIndicator.hidesWhenStopped = true
         view.addSubview(activityIndicator)
+        print(sportsType ?? "no sport")
         
         // Show the activity indicator
         activityIndicator.startAnimating()
